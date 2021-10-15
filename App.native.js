@@ -10,7 +10,7 @@ export default function App() {
   return(
     <>
       { auth ? (
-        <Navigation setAuth = { setAuth } />
+        <Navigation setAuth = { setAuth } auth = {auth} />
       ) : (
         <Login setAuth = { setAuth } />
       )}

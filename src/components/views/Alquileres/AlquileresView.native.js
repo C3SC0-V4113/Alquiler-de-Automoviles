@@ -29,30 +29,31 @@ const Alquileres = [
 
 const AlquilerView = () => {
     return(
-        <ScrollView>
         <View >
-          <SearchBar placeholder="Buscar Alquiler..." containerStyle={{backgroundColor: "#1C2530", width:'100%', 
-          borderRadius: 10, borderBottomWidth: 0 }}
-          inputContainerStyle={{backgroundColor: "#B8B8BF"}}/>
-          <FlatList
+            <FlatList
+                ListHeaderComponent = {(
+                <SearchBar 
+                    placeholder="Buscar Alquiler..." 
+                    containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}
+                />
+                )}
                 data = { Alquileres }
                 keyExtractor= { ( item ) => item.id }
                 renderItem = { ( {item} ) => (
-            <View style = {styles.container}>
-            <Text style={styles.title}>Nombre</Text>
-            <TextInput style={styles.textInput} value={item.nombre} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Nombre de cliente"></TextInput>
-            <Text style={styles.title}>Vehiculo</Text>
-            <TextInput style={styles.textInput} value={item.carro} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Vehiculo"></TextInput>
-            <Text style={styles.title}>Tiempo de alquiler</Text>
-            <TextInput style={styles.textInput} value={item.tiempo} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Tiempo de alquiler"></TextInput>
-            <Text style={styles.title}>Estado</Text>
-            <TextInput style={styles.textInput} value={item.estado} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Estado"></TextInput>
-            <TouchableOpacity style={styles.boton}><Text style={styles.textoBoton}>Ver más</Text></TouchableOpacity>
-            </View>
-            )}
+                    <View style = {styles.container}>
+                        <Text style={styles.title}>Nombre</Text>
+                        <TextInput style={styles.textInput} value={item.nombre} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Nombre de cliente"></TextInput>
+                        <Text style={styles.title}>Vehiculo</Text>
+                        <TextInput style={styles.textInput} value={item.carro} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Vehiculo"></TextInput>
+                        <Text style={styles.title}>Tiempo de alquiler</Text>
+                        <TextInput style={styles.textInput} value={item.tiempo} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Tiempo de alquiler"></TextInput>
+                        <Text style={styles.title}>Estado</Text>
+                        <TextInput style={styles.textInput} value={item.estado} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Estado"></TextInput>
+                        <TouchableOpacity style={styles.boton}><Text style={styles.textoBoton}>Ver más</Text></TouchableOpacity>
+                    </View>
+                )}
             />
         </View>
-        </ScrollView>
     )
 }
 

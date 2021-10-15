@@ -42,30 +42,31 @@ const Clientes = [
 
 const ClienteView = () => {
     return(
-        <ScrollView>
         <View >
-          <SearchBar placeholder="Buscar Usuario..." containerStyle={{backgroundColor: "#1C2530", width:'100%', 
-          borderRadius: 10, borderBottomWidth: 0 }}
-          inputContainerStyle={{backgroundColor: "#B8B8BF"}}/>
-          <FlatList
+            <FlatList
+                ListHeaderComponent = {(
+                    <SearchBar 
+                        placeholder="Buscar Usuario..."
+                        containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}
+                    />
+                )}
                 data = { Clientes }
                 keyExtractor= { ( item ) => item.id }
                 renderItem = { ( {item} ) => (
-            <View style = {styles.container}>
-            <Text style={styles.title}>Nombre</Text>
-            <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.nombre}  placeholder="Nombre"></TextInput>
-            <Text style={styles.title}>Correo</Text>
-            <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.correo}   placeholder="Correo"></TextInput>
-            <Text style={styles.title}>Usuario</Text>
-            <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.usuario}   placeholder="Usuario"></TextInput>
-            <Text style={styles.title}>Telefono</Text>
-            <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.telefono}   placeholder="Telefono"></TextInput>
-            <TouchableOpacity style={styles.boton}><Text style={styles.textoBoton}>Ver más</Text></TouchableOpacity>
-            </View>
-            )}
+                    <View style = {styles.container}>
+                        <Text style={styles.title}>Nombre</Text>
+                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.nombre}  placeholder="Nombre"></TextInput>
+                        <Text style={styles.title}>Correo</Text>
+                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.correo}   placeholder="Correo"></TextInput>
+                        <Text style={styles.title}>Usuario</Text>
+                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.usuario}   placeholder="Usuario"></TextInput>
+                        <Text style={styles.title}>Telefono</Text>
+                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.telefono}   placeholder="Telefono"></TextInput>
+                        <TouchableOpacity style={styles.boton}><Text style={styles.textoBoton}>Ver más</Text></TouchableOpacity>
+                    </View>
+                )}
             />
         </View>
-        </ScrollView>
     )
 }
 

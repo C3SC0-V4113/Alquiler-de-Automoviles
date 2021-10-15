@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
+import Splash from '../splash/SplashView.native';
 
 const Users = [{
     nombres: 'Fernando Xavier',
@@ -12,6 +13,7 @@ const Users = [{
 
 const LoginView = ({ setAuth }) => {
 
+    const [ loading, setLoading ] = useState(true);
     const [ registrar, setRegistrar ] = useState(false);
     const [ datos, setDatos ] = useState({
         nombres: '',
@@ -40,6 +42,17 @@ const LoginView = ({ setAuth }) => {
     const createUser = () => {
         Users.push(datos);
         setRegistrar(false);
+    }
+
+    setTimeout( () => {
+        setLoading(false);
+    }, 3000)
+
+    if(loading)
+    {
+        return(
+            <Splash />
+        )
     }
 
     return(

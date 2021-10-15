@@ -60,26 +60,28 @@ const Modelos = [
 
 const MarcasView = () => {
     return(
-        <ScrollView>
-        <View >
-        <SearchBar placeholder="Buscar Modelo..." 
-        containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}/>
-        <FlatList
+        <View>
+            <FlatList
+                ListHeaderComponent = {(
+                    <SearchBar 
+                        placeholder="Buscar Modelo..." 
+                        containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}
+                    />
+                )}
                 data = { Modelos }
                 keyExtractor= { ( item ) => item.id }
                 renderItem = { ( {item} ) => (
-            <View style = {styles.container}>
-            <Text style={styles.title}>Modelo</Text>
-            <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.nombre}  placeholder="Marca"></TextInput>
-            <View style={styles.botones}>
-            <TouchableOpacity style={styles.boton1}><Text style={styles.textoBoton}>Editar</Text></TouchableOpacity>
-            <TouchableOpacity style={styles.boton2}><Text style={styles.textoBoton}>Eliminar</Text></TouchableOpacity>
-            </View>
-            </View>
-            )}
+                    <View style = {styles.container}>
+                        <Text style={styles.title}>Modelo</Text>
+                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.nombre}  placeholder="Marca"></TextInput>
+                        <View style={styles.botones}>
+                            <TouchableOpacity style={styles.boton1}><Text style={styles.textoBoton}>Editar</Text></TouchableOpacity>
+                            <TouchableOpacity style={styles.boton2}><Text style={styles.textoBoton}>Eliminar</Text></TouchableOpacity>
+                        </View>
+                    </View>
+                )}
             />
         </View>
-        </ScrollView>
     )
 }
 

@@ -123,7 +123,7 @@ const VehiculosView = () => {
 
 
     return(
-        <>
+        <View style = {{ backgroundColor: '#1C2530' }}>
             <InputSearch />
             <View
                 style = {{ height: '90%' }}
@@ -143,7 +143,7 @@ const VehiculosView = () => {
                 marcas = { marcas }
                 idAuto = { idAuto }
             />
-        </>
+        </View>
     )
 }
 
