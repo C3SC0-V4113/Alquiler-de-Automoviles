@@ -23,6 +23,7 @@ sequelize.connection = async () =>
         console.log(error);
         //-4078 Error de conexion
         //1054 Columna desconocida
+        //1045 access denied for user
     }
 }
 
