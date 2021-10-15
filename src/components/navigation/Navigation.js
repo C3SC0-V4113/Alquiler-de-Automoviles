@@ -9,7 +9,7 @@ const Drawer = createDrawerNavigator();
 const Navigation = () => {
     return(
         <NavigationContainer>
-            <Drawer.Navigator initialRouteName = 'Vehiculos'>
+            <Drawer.Navigator>
                 <Drawer.Screen name='Inicio' component={Saludo} />
                 <Drawer.Screen name='Vehiculos' component={Vehiculos} />
                 <Drawer.Screen name='Marcas y Modelos' component={Saludo} />
