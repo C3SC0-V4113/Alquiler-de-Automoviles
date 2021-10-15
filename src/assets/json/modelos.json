@@ -1,0 +1,18 @@
+[
+    {
+      "id": 1,
+      "nombre": "Honda Civic"
+    },
+    {
+      "id": 2,
+      "nombre": "Toyota Corolla"
+    },
+    {
+      "id": 3,
+      "nombre": "Tesla Model S"
+    },
+    {
+      "id": 4,
+      "nombre": "Mitsubishi Lancer EVO"
+    }
+  ]

@@ -1,0 +1,66 @@
+[
+    {
+      "id": 1,
+      "idmodelo": 1,
+      "anio": 2019,
+      "placa": "P23567",
+      "precio_dia": 12,
+      "transmision": "estandar",
+      "pasajeros": 4,
+      "puertas": 4,
+      "ac": "si",
+      "motor": "260",
+      "vidrios_electricos": "si",
+      "imagen":
+        "https://tdrresearch.azureedge.net/photos/chrome/Expanded/White/2019HOC020005/2019HOC02000501.jpg",
+      "estado": 1
+    },
+    {
+      "id": 2,
+      "idmodelo": 2,
+      "anio": 2018,
+      "placa": "P23568",
+      "precio_dia": 14,
+      "transmision": "automatico",
+      "pasajeros": 4,
+      "puertas": 4,
+      "ac": "si",
+      "motor": "260",
+      "vidrios_electricos": "si",
+      "imagen":
+        "https://www.toyota.com.sv/wp-content/uploads/2019/07/Corolla_Negro.png",
+      "estado": 1
+    },
+    {
+      "id": 3,
+      "idmodelo": 3,
+      "anio": 2020,
+      "placa": "P23587",
+      "precio_dia": 20,
+      "transmision": "estandar",
+      "pasajeros": 2,
+      "puertas": 2,
+      "ac": "si",
+      "motor": "260",
+      "vidrios_electricos": "si",
+      "imagen":
+        "https://www.freshnessmag.com/.image/t_share/MTM3OTI3MjA3NzcyNDk3Nzcx/tesla-model-s-coupe-concept--by-theophilus-chin---0.jpg",
+      "estado": 2
+    },
+    {
+      "id": 4,
+      "idmodelo": 4,
+      "anio": 2021,
+      "placa": "P23737",
+      "precio_dia": 14,
+      "transmision": "automatico",
+      "pasajeros": 4,
+      "puertas": 4,
+      "ac": "si",
+      "motor": "260",
+      "vidrios_electricos": "si",
+      "imagen":
+        "https://www.diariomotor.com/imagenes/picscache/750x/mitsubishi-lancer-evo-x-p1_750x.jpg",
+      "estado": 1
+    }
+]
