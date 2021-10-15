@@ -49,6 +49,7 @@ La licenciante no puede revocar estas libertades en tanto usted siga los términ
 *No hay restricciones adicionales — No puede aplicar términos legales ni medidas tecnológicas que restrinjan legalmente a otras a hacer cualquier uso permitido por la licencia.*
 ### Enlaces de Interés
 ------------
-- [Tablero de Trello](https://trello.com/b/yhPdXO9S "Tablero de Trello")
+- [Espacio de Trabajo en Trello](https://trello.com/alquilerdeautomoviles "Espacio de Trabajo en Trello")
 - [Mockups para Móviles](https://drive.google.com/file/d/1aahekHh39qQBUmEBpHBD1vrsQGAVFiXr/view?usp=sharing "Mockups para Móviles")
 - [Mockups para Web](https://drive.google.com/file/d/1Nj4tgP2s2MF0_RS8Ly33PkUxCRlMGFuj/view?usp=sharing "Mockups para Web")
+- [Documento de Fase I](https://drive.google.com/file/d/1rxc3KcRmN-uxyjPbPIzqUIgzfONnjV_b/view?usp=sharing "Documento de Fase I")
