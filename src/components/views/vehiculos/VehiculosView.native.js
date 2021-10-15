@@ -13,8 +13,8 @@ const VehiculosView = () => {
     const [ autos, setAutos ] = useState([]);
     const [ idAuto, setIdAuto] = useState(0);
     const [ alert, setAlert ] = useState(false);
-    const urlAPI = 'http://192.168.1.6:3000/api/marcas/';
-    const urlAutos = 'http://192.168.1.6:3000/api/autos/';
+    const urlAPI = 'http://192.168.1.11:3000/api/marcas/';
+    const urlAutos = 'http://192.168.1.11:3000/api/autos/';
 
     useEffect(() => {
         //FUNCION PARA OBTENER LAS MARCAS DESDE LA API
