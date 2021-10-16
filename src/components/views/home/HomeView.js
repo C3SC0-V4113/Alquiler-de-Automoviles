@@ -7,6 +7,9 @@ import {
   Form,
   Button,
   Card,
+  Collapse,
+  Carousel,
+  CarouselItem,
 } from "react-bootstrap";
 import ImageGallery from "react-image-gallery";
 import AutosJSON from "../../../assets/json/autos.json";
@@ -24,7 +27,6 @@ const Objeto = () => {
       }
     });
   });
-  console.log(autos);
 };
 
 const images = [
@@ -43,19 +45,50 @@ const images = [
 ];
 
 const HomeView = () => {
-  Objeto();
-  return (
-    <>
-      <ImageGallery
+  Objeto(); /* <ImageGallery
         showPlayButton={false}
         showFullscreenButton={false}
         lazyLoad={true}
         showThumbnails={false}
         showBullets={true}
         items={images}
-      />
-      <Container fluid>
-        <Row>
+      />*/
+  return (
+    <>
+      <Container style={{backgroundColor: '#F7B569'}} fluid>
+        <Row style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}>
+        <Carousel
+          fade
+          nextLabel=""
+          prevLabel=""
+        >
+          <CarouselItem>
+            <img
+              className="d-block w-100"
+              src="https://picsum.photos/id/1018/1000/600/"
+              alt="Primera"
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <img
+              className="d-block w-100"
+              src="https://picsum.photos/id/1015/1000/600/"
+              alt="Segunda"
+            />
+          </CarouselItem>
+          <CarouselItem>
+            <img
+              className="d-block w-100"
+              src="https://picsum.photos/id/1019/1000/600/"
+              alt="Tercera"
+            />
+          </CarouselItem>
+        </Carousel>
+        </Row>
+        <Row
+          className="align-items-center"
+          style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}
+        >
           <Col className="justify-content-left p-5 pt-15" xs={12} md={6}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae
             magna tellus. Phasellus vehicula diam id mollis interdum. Cras vel
@@ -66,13 +99,13 @@ const HomeView = () => {
           </Col>
           <Col className="justify-content-center" xs={12} md={6}>
             <Image
-              src="https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_0c7166c16ff74073b65851f7f0b360ed.jpg"
+              src="https://es.nissanusa.com/content/dam/Nissan/us/vehicles/sentra/2021/overview/2021-nissan-sentra-orange-against-white-background.png"
               fluid
             />
           </Col>
         </Row>
         <Form>
-          <Form.Group as={Row} className="mb-3 justify-content-evenly p-4">
+          <Form.Group style={{backgroundColor: '#F7B569'}} as={Row} className="mb-3 justify-content-evenly p-4">
             <Col className="mb-2" xs={12} md={2}>
               <Form.Control type="text" placeholder="Sucursal de Entrega" />
             </Col>
@@ -86,16 +119,16 @@ const HomeView = () => {
               <Form.Control type="date" placeholder="Fecha de Devolución" />
             </Col>
             <Col xs={12} className="justify-content-center" md={2}>
-              <Button variant="primary" type="submit">
-                Submit
+              <Button style={{ backgroundColor: "#1E2430", color: "#f9f9f9", borderColor:'#202633'}} variant="primary" type="submit">
+                Buscar
               </Button>
             </Col>
           </Form.Group>
         </Form>
-        <Row>
+        <Row style={{backgroundColor: '#F7B569'}}>
           {autos.map(function (item, i) {
             return (
-              <Col xs={12} md={3}>
+              <Col key={i} xs={12} md={3}>
                 <Card>
                   <Card.Img variant="top" src={item.imagen} />
                   <Card.Body>
@@ -104,14 +137,14 @@ const HomeView = () => {
                     <Card.Text>Caja: {item.transmision}</Card.Text>
                     <Card.Text>Puertas: {item.puertas}</Card.Text>
                     <Card.Text>Pasajeros: {item.pasajeros}</Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Button style={{ backgroundColor: "#1E2430", color: "#f9f9f9", borderColor:'#202633'}} variant="primary">Ver Auto</Button>
                   </Card.Body>
                 </Card>
               </Col>
             );
           })}
         </Row>
-        <Row>
+        <Row className="mt-5" style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}>
           <Col xs={12} className="text-center text-uppercase fs-2 p-5">
             Derechos Reservados
           </Col>

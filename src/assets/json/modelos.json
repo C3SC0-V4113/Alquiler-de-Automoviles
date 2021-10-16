@@ -14,5 +14,13 @@
     {
       "id": 4,
       "nombre": "Mitsubishi Lancer EVO"
+    },
+    {
+      "id": 5,
+      "nombre": "Ford Escape"
+    },
+    {
+      "id": 6,
+      "nombre": "Volkswagen Bettle"
     }
   ]

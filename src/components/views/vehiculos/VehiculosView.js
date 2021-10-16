@@ -4,9 +4,6 @@ import {
   Container,
   Row,
   Col,
-  Navbar,
-  Nav,
-  NavDropdown,
   Image,
   Form,
   Button,
@@ -32,7 +29,7 @@ const Objeto = () => {
 };
 
 let items = [];
-for (let number = 1; number <= 5; number++) {
+for (let number = 1; number <= 2; number++) {
   items.push(<Pagination.Item key={number}>{number}</Pagination.Item>);
 }
 
@@ -41,14 +38,14 @@ const VehiculosView = () => {
   return (
     <>
       <Container fluid>
-        <Row>
-          <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
-            Vehiculos
+        <Row >
+          <Col  className="text-center text-uppercase fs-2 p-5" xs={12}>
+            <h1 style={{color: "#F7B569"}}>Vehiculos</h1>
           </Col>
         </Row>
-        <Row className="text-end">
+        <Row className="text-end mb-5">
           <Col className="px-5" xs={12}>
-            <Button size="lg" variant="primary">
+            <Button style={{ backgroundColor: "#1E2430", color: "#f9f9f9", borderColor:'#202633'}} size="lg" variant="primary">
               Agregar Auto
             </Button>
           </Col>
@@ -66,32 +63,32 @@ const VehiculosView = () => {
                 </Col>
                 <h3>
                   Placa:{" "}
-                  <span class="badge rounded-pill bg-primary">
+                  <span class="badge rounded-pill" style={{ backgroundColor: "#F7B569", color: "#f9f9f9", borderColor:'#DEA35F'}}>
                     {item.placa}
                   </span>
                 </h3>
                 <h3>
                   Año:{" "}
-                  <span class="badge rounded-pill bg-primary">{item.anio}</span>
+                  <span class="badge rounded-pill" style={{ backgroundColor: "#F7B569", color: "#f9f9f9", borderColor:'#DEA35F'}}>{item.anio}</span>
                 </h3>
                 <h3>
                   Transmision:{" "}
-                  <span class="badge rounded-pill bg-primary">
+                  <span class="badge rounded-pill" style={{ backgroundColor: "#F7B569", color: "#f9f9f9", borderColor:'#DEA35F'}}>
                     {item.transmision}
                   </span>
                 </h3>
                 <h3>
                   Pasajeros:{" "}
-                  <span class="badge rounded-pill bg-primary">
+                  <span class="badge rounded-pill" style={{ backgroundColor: "#F7B569", color: "#f9f9f9", borderColor:'#DEA35F'}}>
                     {item.placa}
                   </span>
                 </h3>
               </Col>
               <Col xs={12} md={3} className="d-grid gap-2 p-5">
-                <Button variant="primary" size="lg" type="submit">
+                <Button style={{ backgroundColor: "#F7B569", color: "#f9f9f9", borderColor:'#DEA35F'}} variant="primary" size="lg" type="submit">
                   Editar
                 </Button>
-                <Button variant="secondary" size="lg" type="submit">
+                <Button variant="danger" size="lg" type="submit">
                   Eliminar
                 </Button>
               </Col>
@@ -101,7 +98,7 @@ const VehiculosView = () => {
         <Pagination size="lg" className="justify-content-end px-5">
           {items}
         </Pagination>
-        <Row>
+        <Row className="mt-5" style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}>
           <Col xs={12} className="text-center text-uppercase fs-2 p-5">
             Derechos Reservados
           </Col>

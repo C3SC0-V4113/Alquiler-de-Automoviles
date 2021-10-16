@@ -1,15 +1,8 @@
 import React from "react";
 import {
   Container,
-  Row,
-  Col,
   Navbar,
   Nav,
-  NavDropdown,
-  Image,
-  Form,
-  Button,
-  Card,
 } from "react-bootstrap";
 import { Switch, Route, Link } from "react-router-dom";
 import Home from "../views/home/Home";
@@ -18,7 +11,7 @@ import Vehiculos from "../views/vehiculos/Vehiculos";
 const WebNav = () => {
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar collapseOnSelect expand="lg" style={{backgroundColor: '#1E2430'}} variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">
             <img
@@ -28,7 +21,7 @@ const WebNav = () => {
               height="30"
               className="d-inline-block align-top"
             />{" "}
-            React-Bootstrap
+            React-Cars
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse

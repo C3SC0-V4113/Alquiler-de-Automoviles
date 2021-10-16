@@ -62,5 +62,37 @@
       "imagen":
         "https://www.diariomotor.com/imagenes/picscache/750x/mitsubishi-lancer-evo-x-p1_750x.jpg",
       "estado": 1
+    },
+    {
+      "id": 5,
+      "idmodelo": 5,
+      "anio": 2021,
+      "placa": "P23439",
+      "precio_dia": 20,
+      "transmision": "manual",
+      "pasajeros": 5,
+      "puertas": 4,
+      "ac": "si",
+      "motor": "300",
+      "vidrios_electricos": "si",
+      "imagen":
+        "https://carsguide-res.cloudinary.com/image/upload/f_auto,fl_lossy,q_auto,t_default/v1/editorial/ford-escape-my21-index-1.png",
+      "estado": 1
+    },
+    {
+      "id": 6,
+      "idmodelo": 6,
+      "anio": 1966,
+      "placa": "P15439",
+      "precio_dia": 10,
+      "transmision": "automatico",
+      "pasajeros": 2,
+      "puertas": 2,
+      "ac": "no",
+      "motor": "150",
+      "vidrios_electricos": "no",
+      "imagen":
+        "https://i.pinimg.com/originals/1e/39/de/1e39dee6f9b5efec13b296ece196ee03.jpg",
+      "estado": 1
     }
 ]
