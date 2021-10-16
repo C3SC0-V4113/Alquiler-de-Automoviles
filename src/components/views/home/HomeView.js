@@ -65,21 +65,21 @@ const HomeView = () => {
           <CarouselItem>
             <img
               className="d-block w-100"
-              src="https://picsum.photos/id/1018/1000/600/"
+              src='https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80'
               alt="Primera"
             />
           </CarouselItem>
           <CarouselItem>
             <img
               className="d-block w-100"
-              src="https://picsum.photos/id/1015/1000/600/"
+              src="http://hdqwalls.com/wallpapers/bentley-continental-gt-2018-4k-1g.jpg"
               alt="Segunda"
             />
           </CarouselItem>
           <CarouselItem>
             <img
               className="d-block w-100"
-              src="https://picsum.photos/id/1019/1000/600/"
+              src="https://wallpapercave.com/wp/wp7381593.jpg"
               alt="Tercera"
             />
           </CarouselItem>
