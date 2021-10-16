@@ -7,6 +7,7 @@ import {
 import { Switch, Route, Link } from "react-router-dom";
 import Home from "../views/home/Home";
 import Vehiculos from "../views/vehiculos/Vehiculos";
+import Login from "../views/login/Login";
 
 const WebNav = () => {
   return (
@@ -31,7 +32,7 @@ const WebNav = () => {
             <Nav>
               <Nav.Link as={Link} to="/">Inicio</Nav.Link>
               <Nav.Link as={Link} to="/Autos">Autos</Nav.Link>
-              <Nav.Link>Iniciar Sesion</Nav.Link>
+              <Nav.Link as={Link} to="/Login">Iniciar Sesion</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -39,6 +40,7 @@ const WebNav = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/Autos" component={Vehiculos} />
+        <Route path="/Login" component={Login}/>
       </Switch>
     </>
   );

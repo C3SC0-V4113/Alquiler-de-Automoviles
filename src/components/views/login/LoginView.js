@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import LoginForm from './componentes/LoginForm';
+import LoginForm from '../../common/web/LoginForm';
+import "./Login.css";
 
-function App() {
+function LoginView() {
   const adminUser = {
     email: "admin@admin.com",
     password: "admin123"
@@ -28,7 +29,7 @@ function App() {
     setUser({ name: "", email:""});
   }
   return (
-    <div className="App">
+    <div className="LoginView">
       {(user.email != "") ? (
         <div className="welcome">
           <h2>¡Bienvenido <span>{user.name}</span>!</h2>
@@ -41,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default LoginView;
