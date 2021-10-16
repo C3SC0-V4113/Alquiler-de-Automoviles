@@ -46,9 +46,11 @@ const VehiculosView = () => {
             Vehiculos
           </Col>
         </Row>
-        <Row>
-          <Col xs={12}>
-            <Button size="lg" variant="primary">Agregar Auto</Button>
+        <Row className="text-end">
+          <Col className="px-5" xs={12}>
+            <Button size="lg" variant="primary">
+              Agregar Auto
+            </Button>
           </Col>
         </Row>
 
@@ -86,26 +88,19 @@ const VehiculosView = () => {
                 </h3>
               </Col>
               <Col xs={12} md={3} className="d-grid gap-2 p-5">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  type="submit"
-                >
+                <Button variant="primary" size="lg" type="submit">
                   Editar
                 </Button>
-
-                <Button
-                  variant="secondary"
-                  size="lg"
-                  type="submit"
-                >
+                <Button variant="secondary" size="lg" type="submit">
                   Eliminar
                 </Button>
               </Col>
             </Row>
           );
         })}
-        <Pagination>{items}</Pagination>
+        <Pagination size="lg" className="justify-content-end px-5">
+          {items}
+        </Pagination>
         <Row>
           <Col xs={12} className="text-center text-uppercase fs-2 p-5">
             Derechos Reservados
