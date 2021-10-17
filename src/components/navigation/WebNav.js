@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { Switch, Route, Link } from "react-router-dom";
 import Home from "../views/home/Home";
@@ -7,6 +7,8 @@ import Login from "../views/login/Login";
 import Signup from "../views/signup/Signup";
 
 const WebNav = () => {
+  const [auth, setAuth] = useState(false);
+  const [user, setUser] = useState(0);
   return (
     <>
       <Navbar
@@ -49,10 +51,18 @@ const WebNav = () => {
         </Container>
       </Navbar>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/Autos" component={Vehiculos} />
-        <Route path="/Login" component={Login} />
-        <Route path="/Signup" component={Signup} />
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/Autos">
+          <Vehiculos />
+        </Route>
+        <Route exact path="/Login">
+          <Login />
+        </Route>
+        <Route exact path="/Signup">
+          <Signup />
+        </Route>
       </Switch>
     </>
   );
