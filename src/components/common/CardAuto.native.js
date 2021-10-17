@@ -63,8 +63,9 @@ const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
 const styles = StyleSheet.create({
     card: {
         padding: 0,
-        borderTopLeftRadius: 5,
-        borderTopRightRadius: 5
+        borderRadius: 5,
+        borderWidth: 0,
+        backgroundColor: '#A1A1AB'
     },
     image: {
         borderTopLeftRadius: 5,

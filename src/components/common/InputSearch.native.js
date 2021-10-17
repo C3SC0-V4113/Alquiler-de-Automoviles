@@ -11,9 +11,7 @@ const InputSearch = ({ placeholder, SearchMethod }) => {
             placeholder="Buscar Vehículo"
             onChangeText={ search => setValue(search) }
             value={ value }
-            lightTheme = {true}
-            containerStyle = {{ backgroundColor: '#FFF', height: 50, padding: 0 }}
-            inputContainerStyle = {{ backgroundColor: '#FFF', height: 50 }}
+            containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}
         />
     )
 }
