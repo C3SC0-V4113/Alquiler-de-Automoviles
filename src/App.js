@@ -1,24 +1,15 @@
-import React from 'react';
-import './App.css';
-import Saludo from './components/views/saludo/Saludo';
+import React from "react";
+import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import WebNav from "./components/navigation/WebNav";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Saludo />
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <WebNav />
+      </BrowserRouter>
+    </>
   );
 }
 
