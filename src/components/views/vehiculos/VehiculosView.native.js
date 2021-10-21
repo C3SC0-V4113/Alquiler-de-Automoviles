@@ -4,91 +4,34 @@ import CardAuto from '../../common/CardAuto.native';
 import ButtonFloating from '../../common/ButtonFloating.native';
 import InputSearch from '../../common/InputSearch.native';
 import ModalAuto from '../../common/ModalAuto.native';
+import FetchAPI from '../../../utils/FetchAPI';
 
 
 const VehiculosView = () => {
     
     const [ modalVisible, setModalVisible ] = useState(false);
-    const [ marcas, setMarcas] = useState([]);
     const [ autos, setAutos ] = useState([]);
     const [ idAuto, setIdAuto] = useState(0);
     const [ alert, setAlert ] = useState(false);
-    const urlAPI = 'http://192.168.1.11:3000/api/marcas/';
-    const urlAutos = 'http://192.168.1.11:3000/api/autos/';
+    const urlAutos = 'http://192.168.1.6:3000/api/autos/';
 
-    useEffect(() => {
-        //FUNCION PARA OBTENER LAS MARCAS DESDE LA API
-        const getMarcas = async () => {
-            const response = await fetch( urlAPI, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            return response.json();
-        }
-        
-        //OBTIENE LAS MARCAS CUANDO EL MODAL SE MUESTRA
-        if(modalVisible)
-        {
-            let marcasAPI = getMarcas();
-            marcasAPI.then( data => {
-                setMarcas([...data.marcas])
-            })
-        }
-    }, [modalVisible])
-
-    useEffect(() => {
-        const getAutos = async () => {
-            const response = await fetch( urlAutos, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            return response.json();
-        }
-        let autosAPI = getAutos();
-        autosAPI.then( data => {
-            setAutos([...data])
-        })
-    }, [modalVisible])
-
-    //FUNCION PARA HACER LA PETICION PARA OBTENER A LOS VEHICULOS
-    const getFetchAutos = async () => {
-        const response = await fetch( urlAutos, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        return response.json();
-    }
     //FUNCION PARA OBTENER LOS VEHICULOS
     const getAutos = () => {
-        let autosAPI = getFetchAutos();
+        let autosAPI = FetchAPI(urlAutos, 'GET', {});
         autosAPI.then( data => {
             setAutos([...data])
         })
     }
     useEffect(() => {
-        getAutos()
-    }, [])
+        if(!modalVisible)
+        {
+            getAutos()
+        }
+    }, [modalVisible])
 
-
-
-    const deleteFetchVehiculo = async () => {
-        const response = await fetch(`${urlAutos}${idAuto}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        return response.json();
-    }
-
+    //FUNCION PARA ELIMINAR VEHICULOS
     const deleteVehiculo = () => {
-        const autoAPI = deleteFetchVehiculo();
+        const autoAPI = FetchAPI(`${urlAutos}${idAuto}`, 'DELETE', {});
 
         autoAPI.then( data => {
             getAutos();
@@ -106,6 +49,7 @@ const VehiculosView = () => {
         }
     }, [alert])
 
+    //ALERT
     const AlertVehiculo = ( ) =>{
         Alert.alert(
             "Eliminar vehículo",
@@ -123,7 +67,7 @@ const VehiculosView = () => {
 
 
     return(
-        <View style = {{ backgroundColor: '#1C2530' }}>
+        <View style = {{ backgroundColor: '#1C2530', height: '100%' }}>
             <InputSearch />
             <View
                 style = {{ height: '90%' }}
@@ -137,12 +81,13 @@ const VehiculosView = () => {
             </View>
             <ButtonFloating modalVisible = { modalVisible } setModalVisible = { setModalVisible } changeId = { setIdAuto } />
 
-            <ModalAuto 
-                modalVisible = { modalVisible } 
-                setModalVisible = { setModalVisible } 
-                marcas = { marcas }
-                idAuto = { idAuto }
-            />
+            { modalVisible ? (
+                <ModalAuto 
+                    modalVisible = { modalVisible } 
+                    setModalVisible = { setModalVisible }
+                    idAuto = { idAuto }
+                />
+            ) : (null) }
         </View>
     )
 }

@@ -3,8 +3,9 @@ import { View, Modal, Pressable, StyleSheet, Text, TextInput, ScrollView, SafeAr
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Divider } from 'react-native-elements';
 import {Picker} from '@react-native-picker/picker';
+import FetchAPI from '../../utils/FetchAPI';
 
-const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
+const ModalAuto = ({ modalVisible, setModalVisible, idAuto}) => {
 
     const [ data, setData ] = useState({
         id_modelo: "",
@@ -21,46 +22,36 @@ const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
         id_estado_auto: 1,
     })
     const [ marca, setMarca ] = useState(0);
+    const [ marcas, setMarcas ] = useState([]);
     const [ modelos, setModelos ] = useState([]);
+
+    const urlMarcas = 'http://192.168.1.6:3000/api/marcas/';
     const urlAPI = 'http://192.168.1.6:3000/api/modelos/';
     const urlAutos = 'http://192.168.1.6:3000/api/autos/';
 
+    //PARA OBTENER MARCAS
     useEffect( () => {
-        //FUNCION PARA OBTENER LOS MODELOS RESPECTO A LA MARCA SELECCIONADA
-        const getModelos = async () =>{
-            const response = await fetch(`${urlAPI}/${marca}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        let marcasAPI = FetchAPI(urlMarcas, 'GET', {});
+        marcasAPI.then( data => {
+            setMarcas([...data.marcas])
+        })
+    }, [])
+
+    //PARA OBTENER MODELOS
+    useEffect( () => {
+        if(marca != 0)
+        {
+            let ModelosAPi = FetchAPI(`${urlAPI}/${marca}`, 'GET', {})
+            ModelosAPi.then( data => {
+                //SE GUARDAN LOS MODELOS
+                setModelos([ ...data.modelos ])
             })
-            return response.json();
         }
-
-        let ModelosAPi = getModelos()
-        ModelosAPi.then( data => {
-            //SE GUARDAN LOS MODELOS
-            setModelos([ ...data.modelos ])
-        })
     }, [marca])
-
-    //FUNCION PARA HACER LA PETICION PARA CREAR LOS AUTOS
-    const createFetchVehiculo = async () => {
-        let response = await fetch( urlAutos, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-        
-        return response.text();
-    }
 
     //FUNCION PARA CREAR LOS AUTOS
     const createVehiculo = () => {
-        let vehiculoNew = createFetchVehiculo();
+        let vehiculoNew = FetchAPI(urlAutos, 'POST', data);
         vehiculoNew.then( data => {
             if( data.id_auto_PK !== 0 )
             {
@@ -72,23 +63,9 @@ const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
         
     }
 
-    //FUNCION PARA HACER LA PETICION PARA MODIFICAR LOS AUTOS
-    const updateFetchVechiculo = async () => {
-        const response = await fetch(`${urlAutos}${data.id_auto}`, {
-            method: 'PUT',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        return response.json();
-    }
-
     //FUNCION PARA MODIFICAR LOS AUTOS
     const updateVehiculo = () => {
-        const autoAPI = updateFetchVechiculo();
+        const autoAPI = FetchAPI(`${urlAutos}${data.id_auto}`, 'PUT', data);
 
         autoAPI.then( data => {
             console.log(data);
@@ -100,19 +77,10 @@ const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
     }
 
     useEffect( () => {
-        //FUNCION PARA OBTENER LA INFORMACION DEL AUTO SEGUN SU ID
-        const getVehiculo = async () => {
-            const response = await fetch(`${urlAutos}${idAuto}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            return response.json();
-        }
         if(idAuto > 0)
         {
-            let autoAPI = getVehiculo();
+            //FUNCION PARA OBTENER LA INFORMACION DEL AUTO SEGUN SU ID
+            let autoAPI = FetchAPI(`${urlAutos}${idAuto}`, 'GET', {});
             autoAPI.then( data => {
                 const { id_auto_PK, anio, placa, precio_dia, transmision, pasajeros, puertas, ac, motor, vidrios_electricos, imagen, modelo} = data[0];
                 setMarca(modelo.marca.id_marca_PK)
@@ -157,8 +125,9 @@ const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
             imagen: "",
             id_estado_auto: 1,
         })
-
-        setMarca('')
+        setMarcas([]);
+        setMarca('');
+        setModelos([]);
     }
 
     return(
@@ -188,8 +157,7 @@ const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
                 <Divider style = {{ borderBottomWidth: 5 }} />
                 <Text 
                     style = {{ color: '#FFF', paddingHorizontal: 20, fontSize: 18, marginTop: 10, textAlign: 'center' }}
-                >
-                    Ingresar la información del vehículo</Text>
+                >Ingresar la información del vehículo</Text>
 
                 <ScrollView style={styles.modalView}>
 
@@ -198,7 +166,7 @@ const ModalAuto = ({ modalVisible, setModalVisible, marcas, idAuto}) => {
                         <Picker
                             style = { styles.picker }
                             selectedValue={ marca }
-                            onValueChange={(itemValue, itemIndex) => setMarca(itemValue) }
+                            onValueChange={(itemValue, itemIndex) => setMarca(  itemValue ) }
                         >
                             <Picker.Item label="Seleccione la marca" value="" />
                             { marcas.map( (marca, index) => (
