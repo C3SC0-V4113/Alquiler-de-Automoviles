@@ -5,7 +5,16 @@ import { Divider } from 'react-native-elements';
 import {Picker} from '@react-native-picker/picker';
 import FetchAPI from '../../utils/FetchAPI';
 
-const ModalAuto = ({ modalVisible, setModalVisible, idAuto}) => {
+//URL's API
+import { urlAutos, urlMarcas, urlModelos } from '../../consts/URLs';
+
+//ALERT
+import { alertMovil } from '../../utils/Alert';
+
+//FUNCIONES PARA VALIDAR
+import { validationString, validationNumber } from '../../utils/Validations';
+
+const ModalAuto = ({ modalVisible, setModalVisible, idAuto }) => {
 
     const [ data, setData ] = useState({
         id_modelo: "",
@@ -25,10 +34,6 @@ const ModalAuto = ({ modalVisible, setModalVisible, idAuto}) => {
     const [ marcas, setMarcas ] = useState([]);
     const [ modelos, setModelos ] = useState([]);
 
-    const urlMarcas = 'http://192.168.1.6:3000/api/marcas/';
-    const urlAPI = 'http://192.168.1.6:3000/api/modelos/';
-    const urlAutos = 'http://192.168.1.6:3000/api/autos/';
-
     //PARA OBTENER MARCAS
     useEffect( () => {
         let marcasAPI = FetchAPI(urlMarcas, 'GET', {});
@@ -41,7 +46,7 @@ const ModalAuto = ({ modalVisible, setModalVisible, idAuto}) => {
     useEffect( () => {
         if(marca != 0)
         {
-            let ModelosAPi = FetchAPI(`${urlAPI}/${marca}`, 'GET', {})
+            let ModelosAPi = FetchAPI(`${urlModelos}/${marca}`, 'GET', {})
             ModelosAPi.then( data => {
                 //SE GUARDAN LOS MODELOS
                 setModelos([ ...data.modelos ])
@@ -51,29 +56,129 @@ const ModalAuto = ({ modalVisible, setModalVisible, idAuto}) => {
 
     //FUNCION PARA CREAR LOS AUTOS
     const createVehiculo = () => {
-        let vehiculoNew = FetchAPI(urlAutos, 'POST', data);
-        vehiculoNew.then( data => {
-            if( data.id_auto_PK !== 0 )
-            {
-                console.log('el vehiculo se creo');
-                reset();
-            }
-        })
-        .catch( err => { console.log(err) })
-        
+        if(validacionForm())
+        {
+            let vehiculoNew = FetchAPI(urlAutos, 'POST', data);
+            vehiculoNew.then( data => {
+                if( data.id_auto_PK !== 0 )
+                {
+                    console.log('el vehiculo se creo');
+                    reset();
+                }
+            })
+            .catch( err => { console.log(err) })
+        }
     }
 
     //FUNCION PARA MODIFICAR LOS AUTOS
     const updateVehiculo = () => {
-        const autoAPI = FetchAPI(`${urlAutos}${data.id_auto}`, 'PUT', data);
+        if(validacionForm())
+        {
 
-        autoAPI.then( data => {
-            console.log(data);
-            reset();
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            const autoAPI = FetchAPI(`${urlAutos}${data.id_auto}`, 'PUT', data);
+    
+            autoAPI.then( data => {
+                console.log(data);
+                reset();
+                setModalVisible(false);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+    }
+
+    const validacionForm = () => {
+        if( validationNumber(marca) )
+        {
+            if( validationNumber(data.id_modelo) )
+            {
+                if( validationNumber(data.anio) )
+                {
+                    if( validationString(data.placa) )
+                    {
+                        if( validationString(data.transmision) )
+                        {
+                            if( validationNumber(data.pasajeros) )
+                            {
+                                if( validationNumber(data.puertas) )
+                                {
+                                    if( validationString(data.ac) )
+                                    {
+                                        if( validationNumber(data.motor) )
+                                        {
+                                            if( validationString(data.vidrios_electricos) )
+                                            {
+                                                if( validationNumber(data.precio_dia) )
+                                                {
+                                                    return true;
+                                                }
+                                                else
+                                                {
+                                                    alertMovil('Advertencia', 'Ingrese el precio por día');
+                                                    return false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                alertMovil('Advertencia', 'Ingrese si lo vidrios son electricos');
+                                                return false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            alertMovil('Advertencia', 'Ingrese el tamaño del motor');
+                                            return false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        alertMovil('Advertencia', 'Ingrese si tiene A/C');
+                                        return false;
+                                    }
+                                }
+                                else
+                                {
+                                    alertMovil('Advertencia', 'Ingrese el número de puertas');
+                                    return false;
+                                }
+                            }
+                            else
+                            {
+                                alertMovil('Advertencia', 'Ingrese el número de pasajeros');
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            alertMovil('Advertencia', 'Ingrese el tipo de transmision');
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        alertMovil('Advertencia', 'Ingrese la placa');
+                        return false;
+                    }
+                }
+                else
+                {
+                    alertMovil('Advertencia', 'Ingrese el año del vehículo');
+                    return false;
+                }
+            }
+            else
+            {
+                alertMovil('Advertencia', 'Seleccione un modelo');
+                return false;
+            }
+        }
+        else
+        {
+            alertMovil('Advertencia', 'Seleccione una marca');
+            return false;
+        }
+        
     }
 
     useEffect( () => {
@@ -99,8 +204,6 @@ const ModalAuto = ({ modalVisible, setModalVisible, idAuto}) => {
                     vidrios_electricos,
                     imagen,
                 })
-
-                
             })
         }
         else

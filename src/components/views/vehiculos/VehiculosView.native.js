@@ -6,6 +6,12 @@ import InputSearch from '../../common/InputSearch.native';
 import ModalAuto from '../../common/ModalAuto.native';
 import FetchAPI from '../../../utils/FetchAPI';
 
+//URL API
+import { urlAutos } from '../../../consts/URLs';
+
+//Alert
+import { alertMovilAction } from '../../../utils/Alert';
+
 
 const VehiculosView = () => {
     
@@ -13,7 +19,6 @@ const VehiculosView = () => {
     const [ autos, setAutos ] = useState([]);
     const [ idAuto, setIdAuto] = useState(0);
     const [ alert, setAlert ] = useState(false);
-    const urlAutos = 'http://192.168.1.6:3000/api/autos/';
 
     //FUNCION PARA OBTENER LOS VEHICULOS
     const getAutos = () => {
@@ -45,25 +50,9 @@ const VehiculosView = () => {
     useEffect( () => {
         if(alert)
         {
-            AlertVehiculo();
+            alertMovilAction('Eliminar vehículo', `¿Desea eliminar el vehículo?`, deleteVehiculo, setAlert)
         }
     }, [alert])
-
-    //ALERT
-    const AlertVehiculo = ( ) =>{
-        Alert.alert(
-            "Eliminar vehículo",
-            `¿Desea eliminar el vehículo?`,
-            [
-                {
-                    text: "No",
-                    onPress: () => setAlert(false),
-                    style: "cancel"
-                },
-                { text: "Si", onPress: () => deleteVehiculo() }
-            ]
-        );
-    }
 
 
     return(
