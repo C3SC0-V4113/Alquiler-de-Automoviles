@@ -6,6 +6,7 @@ const modelo = require('./routes/modelos');
 const usuario = require('./routes/usuarios');
 const auto = require('./routes/autos');
 const alquiler = require('./routes/alquileres');
+const auth = require('./routes/auth');
 
 const app = express();
 app.use(express.json());
@@ -20,7 +21,8 @@ app.use('/api/marcas/', marca);
 app.use('/api/modelos/', modelo);
 app.use('/api/usuarios/', usuario);
 app.use('/api/autos/', auto);
-app.use('/api/alquileres', alquiler);
+app.use('/api/alquileres/', alquiler);
+app.use('/api/auth/', auth)
 
 //Puerto que va usar NODE
 const port = 3000;

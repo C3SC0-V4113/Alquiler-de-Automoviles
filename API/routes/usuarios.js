@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const Usuario = require('../models/usuarios');
 const TipoUserModel = require('../models/tipos_usuario');
 const ruta = express.Router();
@@ -96,7 +97,7 @@ async function createUsuario( body )
         apellidos: body.apellidos,
         email: body.email,
         usuario: body.usuario,
-        password: body.password,
+        password: bcrypt.hashSync( body.password, 10 ),
         fecha_nacimiento: body.fecha_nacimiento,
         direccion: body.direccion,
         telefono: body.telefono
@@ -112,7 +113,7 @@ async function updateUsuario( id, body )
         apellidos: body.apellidos,
         email: body.email,
         usuario: body.usuario,
-        password: body.password,
+        password: bcrypt.hashSync( body.password, 10 ),
         fecha_nacimiento: body.fecha_nacimiento,
         direccion: body.direccion,
         telefono: body.telefono
