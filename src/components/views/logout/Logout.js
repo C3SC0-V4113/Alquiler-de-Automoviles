@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const Logout = (props) => {
-    console.log(props);
+//LOGOUT PARA MOVIL
+export const Logout = ({ route }) => {
+    
+    useEffect( () => {
+        route.params.setAuth(false);
+    }, [])
+
+    return null
 }
 
-export default Logout;
+//LOGOUT PARA WEB
+export const LogoutWeb = () => {}

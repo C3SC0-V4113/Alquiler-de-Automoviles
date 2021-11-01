@@ -7,7 +7,7 @@ import Marca from '../views/Marcas/Marcas'
 import Modelo from '../views/Modelos/Modelos'
 import Alquiler from '../views/Alquileres/Alquileres'
 import Vehiculos from '../views/vehiculos/Vehiculos';
-import Logout from '../views/logout/Logout';
+import {Logout} from '../views/logout/Logout';
 
 const Drawer = createDrawerNavigator();
 
@@ -32,7 +32,7 @@ const Navigation = ({setAuth, auth}) => {
                     <Drawer.Screen name='Alquileres' component={Alquiler} />
                     <Drawer.Screen name='Clientes' component={Cliente} />
                     <Drawer.Screen name='Perfil' component={Saludo} />
-                    <Drawer.Screen name='Salir' component={Logout} initialParams = {{ params: {auth} }} />
+                    <Drawer.Screen name='Salir' component={Logout} initialParams = {{ setAuth: setAuth }} />
                 </Drawer.Navigator>
             </NavigationContainer>
         )

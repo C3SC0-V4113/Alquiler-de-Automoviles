@@ -55,6 +55,14 @@ const LoginView = ({ setAuth }) => {
                     console.log('error:'+err);
                 })
             }
+            else
+            {
+                alertMovil('Advertencia', 'Ingrese su contraseña')
+            }
+        }
+        else
+        {
+            alertMovil('Advertencia', 'Ingrese su usuario')
         }
     }
 
