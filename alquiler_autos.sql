@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2021 a las 02:42:30
+-- Tiempo de generación: 01-11-2021 a las 20:11:47
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -78,14 +78,15 @@ CREATE TABLE `autos` (
 --
 
 INSERT INTO `autos` (`id_auto_PK`, `id_modelo_FK`, `anio`, `placa`, `precio_dia`, `transmision`, `pasajeros`, `puertas`, `ac`, `motor`, `vidrios_electricos`, `imagen`, `id_estado_auto_FK`, `estado`) VALUES
-(1, 1, 2012, 'P606060', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'yaris.jpg', 1, 0),
-(2, 2, 2018, 'P606061', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'corrolla.jpg', 1, 0),
+(1, 1, 2012, 'P606050', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'yaris.jpg', 1, 1),
+(2, 1, 2019, 'P606061', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'corrolla.jpg', 1, 0),
 (3, 1, 2018, 'P962610', '10.00', 'Manual', 5, 4, 'Si', '1.5', 'Si', 'yaris.jpg', 1, 0),
 (4, 2, 2018, 'P959500', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'corrolla.jpg', 1, 0),
-(5, 2, 2016, 'P959501', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'corrolla.jpg', 1, 0),
-(6, 2, 2014, 'P987654', '15.00', 'Manual ', 4, 4, 'No', '1.8', 'No', 'corrolla.jpg', 1, 0),
+(5, 2, 2016, 'P959501', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'corrolla.jpg', 1, 1),
+(6, 2, 2014, 'P987654', '15.00', 'Manual ', 4, 4, 'No', '1.8', 'No', 'corrolla.jpg', 1, 1),
 (8, 2, 2019, 'P984327', '20.00', 'Automático ', 5, 4, 'No', '2.0', 'Si', 'corrolla.jpg', 1, 0),
-(9, 3, 2015, 'P765490', '20.00', 'Manual', 5, 4, 'Si', '2.0', 'Si', 'lancer.jpg', 1, 0);
+(9, 3, 2015, 'P765490', '20.00', 'Manual', 5, 4, 'Si', '2.0', 'Si', 'lancer.jpg', 1, 1),
+(19, 3, 2020, 'P123890', '15.00', 'Automática ', 5, 4, 'Si', '1.8', 'Si', 'lancer.jpg', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -196,7 +197,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario_PK`, `id_tipo_usuario_FK`, `nombres`, `apellidos`, `email`, `usuario`, `password`, `fecha_nacimiento`, `direccion`, `telefono`, `estado`) VALUES
-(1, 1, 'Fernando Xavier', 'Maldonado Canjura', 'xavier@email.com', 'XavierCanjura', '123456', '29/04/2000', 'Nejapa', 12345678, 0);
+(1, 1, 'Fernando Xavier', 'Maldonado Canjura', 'xavier@email.com', 'XavierCanjura', '$2b$10$DPR4DNcv71./eOYzZMbuzej7MGrwTdJ5gtVRYnTTggHgzce/auGJO', '29/04/2000', 'Nejapa', 12345678, 0),
+(2, 1, 'Fernando Xavier', 'Maldonado Canjura', 'xavier6@gmail.com', 'Xavier6', '$2b$10$DPR4DNcv71./eOYzZMbuzej7MGrwTdJ5gtVRYnTTggHgzce/auGJO', '29/04/2000', 'Nejapa', 12345679, 0),
+(3, 3, 'Julio', 'Pérez ', 'julio@gmail.com', 'JulioP', '$2b$10$P2E/PgNLGmaIsjPLnPKAs.WT1lLKUQw1jKJj7eed.OuDGm5.oIcJK', '20/05/1999', 'San Salvador ', 76890432, 0);
 
 --
 -- Índices para tablas volcadas
@@ -266,7 +269,7 @@ ALTER TABLE `alquileres`
 -- AUTO_INCREMENT de la tabla `autos`
 --
 ALTER TABLE `autos`
-  MODIFY `id_auto_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_auto_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `estados_auto`
@@ -296,7 +299,7 @@ ALTER TABLE `tipos_usuario`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_usuario_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas
