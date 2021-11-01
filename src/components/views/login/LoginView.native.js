@@ -3,45 +3,150 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 
 import { Image } from 'react-native-elements';
 import Splash from '../splash/SplashView.native';
 
-const Users = [{
-    nombres: 'Fernando Xavier',
-    apellidos: 'Maldonado Canjura',
-    correo: 'fernanxavi@mail.com',
-    usuario: 'Xavier6',
-    password: '12345678'
-}]
+//IMPORT DE FETCH
+import FetchAPI from '../../../utils/FetchAPI'; 
+
+//IMPORTS DE URL API
+import { urlAuth, urlUsuarios } from '../../../consts/URLs';
+
+//IMPORTS DE VALIDACIONES
+import { validationString, validationEmail, validationNumber } from '../../../utils/Validations';
+
+//IMPORT DE ALERT
+import { alertMovil } from '../../../utils/Alert';
 
 const LoginView = ({ setAuth }) => {
 
     const [ loading, setLoading ] = useState(true);
     const [ registrar, setRegistrar ] = useState(false);
     const [ datos, setDatos ] = useState({
+        id_tipo_usuario: 3,
         nombres: '',
         apellidos: '',
-        correo: '',
+        email: '',
         usuario: '',
-        password: ''
+        password: '',
+        password_confirm: '',
+        fecha_nacimiento: '',
+        direccion: '',
+        telefono: ''
     });
 
-
+    //FUNCION PARA INICIAR SESION EN EL LOGIN
     const loginUser = () => {
-        if(datos.usuario.trim() !== '')
+        if( validationString(datos.usuario) )
         {
-            if(datos.password.trim() !== '')
+            if( validationString(datos.password) )
             {
-                const usuario = Users.findIndex(  user => user.usuario === datos.usuario );
-                const password = Users.findIndex( user => user.password === datos.password )
-                if( usuario !== -1 && password !== -1)
-                {
-                    setAuth(true);
-                }
+                const authAPI = FetchAPI(urlAuth, 'POST', datos);
+
+                authAPI.then( user => {
+                    if(user.message)
+                    {
+                        alertMovil('Advertencia', user.message);
+                    }
+                    else
+                    {
+                        setAuth(true);
+                    }
+
+                })
+                .catch( err => {
+                    console.log('error:'+err);
+                })
             }
         }
     }
 
+    //FUNCION PARA CREAR USUARIOS DESDE EL LOGIN 
     const createUser = () => {
-        Users.push(datos);
-        setRegistrar(false);
+        if( validationString(datos.nombres) )
+        {
+            if( validationString(datos.apellidos) )
+            {
+                if( validationEmail(datos.email) )
+                {
+                    if( validationString(datos.fecha_nacimiento) )
+                    {
+                        if( validationString(datos.direccion) )
+                        {
+                            if( validationNumber(datos.telefono) )
+                            {
+                                if( validationString(datos.usuario) )
+                                {
+                                    if( validationString(datos.password) )
+                                    {
+                                        if( validationString(datos.password_confirm) )
+                                        {
+                                            if( datos.password === datos.password_confirm )
+                                            {
+                                                const userAPI = FetchAPI(urlUsuarios, 'POST', datos);
+
+                                                userAPI.then( user => {
+                                                    if(user.id_usuario_PK)
+                                                    {
+                                                        alertMovil('Información', 'Usuario creado')
+                                                        setRegistrar(false);
+                                                    }
+                                                    else
+                                                    {
+                                                        alertMovil('Información', 'Ocurrio un problema al momento de crear el usuario')
+                                                    }
+                                                })
+                                                .catch( err => {
+                                                    console.log(err);
+                                                })
+                                                
+                                            }
+                                            else
+                                            {
+                                                alertMovil('Advertencia', 'Las contraseñas no son iguales')
+                                            }
+                                        }
+                                        else
+                                        {
+                                            alertMovil('Advertencia', 'Ingrese de nuevo su contraseña')
+                                        }
+                                    }
+                                    else
+                                    {
+                                        alertMovil('Advertencia', 'Ingrese su contraseña')
+                                    }
+                                }
+                                else
+                                {
+                                    alertMovil('Advertencia', 'Ingrese un usuario')
+                                }
+                            }
+                            else
+                            {
+                                alertMovil('Advertencia', 'Ingrese su telefono')
+                            }
+                        }
+                        else
+                        {
+                            alertMovil('Advertencia', 'Ingrese su direccion')
+                        }
+                    }
+                    else
+                    {
+                        alertMovil('Advertencia', 'Ingrese su fecha de nacimiento')
+                    }
+                }
+                else
+                {
+                    alertMovil('Advertencia', 'Ingrese un correo valido')
+                }
+            }
+            else
+            {
+                alertMovil('Advertencia', 'Ingrese sus apellidos')
+            }
+        }
+        else
+        {
+            alertMovil('Advertencia', 'Ingrese sus nombres')
+        }
     }
 
     setTimeout( () => {
@@ -84,8 +189,27 @@ const LoginView = ({ setAuth }) => {
                             <TextInput
                                 style = { [styles.input, { marginVertical: 5}] }
                                 placeholder = 'Correo Electrónico'
-                                onChangeText = { text => setDatos({...datos, correo: text})}
+                                onChangeText = { text => setDatos({...datos, email: text})}
                                 value = { datos.correo }
+                            />
+                            <TextInput
+                                style = { [styles.input, { marginVertical: 5}] }
+                                placeholder = 'Fecha de nacimiento'
+                                onChangeText = { text => setDatos({...datos, fecha_nacimiento: text})}
+                                value = { datos.fecha_nacimiento }
+                            />
+                            <TextInput
+                                style = { [styles.input, { marginVertical: 5}] }
+                                placeholder = 'Direccion'
+                                onChangeText = { text => setDatos({...datos, direccion: text})}
+                                value = { datos.direccion }
+                            />
+                            <TextInput
+                                style = { [styles.input, { marginVertical: 5}] }
+                                placeholder = 'Número de teléfono'
+                                onChangeText = { text => setDatos({...datos, telefono: Number(text) })}
+                                keyboardType = 'numeric'
+                                value = { String(datos.telefono) }
                             />
                             <TextInput
                                 style = { [styles.input, { marginVertical: 5}] }
@@ -103,6 +227,7 @@ const LoginView = ({ setAuth }) => {
                             <TextInput
                                 style = { [styles.input, { marginVertical: 5}] }
                                 placeholder = 'Confirmar contraseña'
+                                onChangeText = { text => setDatos({...datos, password_confirm: text})}
                                 secureTextEntry = {true}
                             />
                         </ScrollView>
