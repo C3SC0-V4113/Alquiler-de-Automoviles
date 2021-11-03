@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Badge,
   Container,
@@ -11,11 +11,15 @@ import {
   Pagination,
   Modal,
 } from "react-bootstrap";
+import FetchAPI from "../../../utils/FetchAPI";
+
+//URL API
+import { urlAutosWeb } from "../../../consts/URLs";
 
 import AutosJSON from "../../../assets/json/autos.json";
 import ModelosJSON from "../../../assets/json/modelos.json";
 
-const autos = AutosJSON;
+/*const autos = AutosJSON;
 
 const modelo = ModelosJSON;
 
@@ -27,7 +31,7 @@ const Objeto = () => {
       }
     });
   });
-};
+};*/
 
 let items = [];
 for (let number = 1; number <= 2; number++) {
@@ -35,17 +39,36 @@ for (let number = 1; number <= 2; number++) {
 }
 
 const VehiculosView = () => {
-  Objeto();
+  /*Objeto();*/
   const [nombre, setNombre] = useState("");
   const [marca, setMarca] = useState("");
   const [año, setAño] = useState(0);
   const [placa, setPlaca] = useState("");
   const [precio, setPrecio] = useState(0);
-  const [imagen, setImagen]=useState("https://tdrresearch.azureedge.net/photos/chrome/Expanded/White/2019HOC020005/2019HOC02000501.jpg")
+  const [imagen, setImagen] = useState(
+    "https://tdrresearch.azureedge.net/photos/chrome/Expanded/White/2019HOC020005/2019HOC02000501.jpg"
+  );
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const obtenerData = (name, brand, year, id, price,img) => {
+
+  const [autos, setAutos] = useState([]);
+
+  useEffect(() => {
+    
+    if (!show) {console.log("Obteniendo a los autos");
+      getAutos();
+    }
+  }, [show]);
+
+  const getAutos = () => {
+    let autosAPI = FetchAPI(urlAutosWeb, "GET", {});
+    autosAPI.then((data) => {
+      setAutos([...data]);
+    });
+  };
+
+  const obtenerData = (name, brand, year, id, price, img) => {
     setNombre(name);
     setMarca(brand);
     setAño(year);
@@ -60,8 +83,9 @@ const VehiculosView = () => {
           <Modal.Title>Agregar y Editar</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-<Container><Row>
-  </Row></Container>
+          <Container>
+            <Row></Row>
+          </Container>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -94,7 +118,9 @@ const VehiculosView = () => {
           </Col>
         </Row>
 
-        {autos.map(function (item, i) {
+        {
+            /*console.log(autos)*/
+        autos.map(function (item, i) {
           return (
             <Row className="p-2" key={i}>
               <Col xs={12} md={4}>
@@ -102,7 +128,7 @@ const VehiculosView = () => {
               </Col>
               <Col xs={12} md={5}>
                 <Col>
-                  <h2>{item.idmodelo.nombre}</h2>
+                  <h2>{item.modelo.modelo}</h2>
                 </Col>
                 <h3>
                   Placa:{" "}
@@ -153,7 +179,7 @@ const VehiculosView = () => {
                       borderColor: "#DEA35F",
                     }}
                   >
-                    {item.placa}
+                    {item.pasajeros}
                   </span>
                 </h3>
               </Col>

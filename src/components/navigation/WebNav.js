@@ -39,7 +39,7 @@ export const WebNavPublic = ({ children, typeUser }) => {
                                 <NavLink to="/public/Login" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Iniciar Sesion
                                 </NavLink>
-                                <NavLink to="/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
+                                <NavLink to="/public/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Registrarse
                                 </NavLink>
                             </Nav>
@@ -51,10 +51,10 @@ export const WebNavPublic = ({ children, typeUser }) => {
                                 <NavLink to="/public/Autos" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Autos
                                 </NavLink>
-                                <NavLink to="/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
+                                <NavLink to="/public/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Perfil
                                 </NavLink>
-                                <NavLink to="/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
+                                <NavLink to="/public/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Salir
                                 </NavLink>
                             </Nav>
