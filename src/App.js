@@ -53,9 +53,9 @@ function App() {
                         </WebNavPriv>
                     </PrivateRoute>
 
-                    <Route path = '*' exact = { true }>
-                        <Redirect from = '*' to = '/public/' />
-                    </Route>
+                    {/* <Route path = '*' exact = { true }>
+                        <Redirect from = '*' to = '/public' />
+                    </Route> */}
 
                     { isAuth && typeUser === 0 ? (
                         changeAuth()

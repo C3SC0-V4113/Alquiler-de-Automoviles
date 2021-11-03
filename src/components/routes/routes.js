@@ -70,6 +70,16 @@ export const routesPublic = [
         path: 'Login',
         component: lazy(() => import('../views/login/Login')),
         exact: true
+    },
+    {
+        path: 'Detalle',
+        component: lazy(() => import('../views/detalleVehiculo/DetalleVehiculo')),
+        exact: true
+    },
+    {
+        path: 'Perfil',
+        component: lazy(() => import('../views/profile/Profile')),
+        exact: true
     }
     // {
     //     path: 'perfil',

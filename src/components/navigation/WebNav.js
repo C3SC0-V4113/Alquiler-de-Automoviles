@@ -51,7 +51,7 @@ export const WebNavPublic = ({ children, typeUser }) => {
                                 <NavLink to="/public/Autos" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Autos
                                 </NavLink>
-                                <NavLink to="/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
+                                <NavLink to="/public/Perfil" className = 'nav-link' activeClassName = 'nav-link active'>
                                     Perfil
                                 </NavLink>
                                 <NavLink to="/Signup" className = 'nav-link' activeClassName = 'nav-link active'>
