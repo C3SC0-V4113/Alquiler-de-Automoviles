@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2021 a las 20:11:47
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 03-11-2021 a las 06:26:58
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -68,7 +68,7 @@ CREATE TABLE `autos` (
   `ac` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
   `motor` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
   `vidrios_electricos` varchar(2) COLLATE utf8_spanish_ci NOT NULL,
-  `imagen` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `imagen` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `id_estado_auto_FK` int(11) NOT NULL,
   `estado` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -78,15 +78,15 @@ CREATE TABLE `autos` (
 --
 
 INSERT INTO `autos` (`id_auto_PK`, `id_modelo_FK`, `anio`, `placa`, `precio_dia`, `transmision`, `pasajeros`, `puertas`, `ac`, `motor`, `vidrios_electricos`, `imagen`, `id_estado_auto_FK`, `estado`) VALUES
-(1, 1, 2012, 'P606050', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'yaris.jpg', 1, 1),
-(2, 1, 2019, 'P606061', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'corrolla.jpg', 1, 0),
-(3, 1, 2018, 'P962610', '10.00', 'Manual', 5, 4, 'Si', '1.5', 'Si', 'yaris.jpg', 1, 0),
-(4, 2, 2018, 'P959500', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'corrolla.jpg', 1, 0),
-(5, 2, 2016, 'P959501', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'corrolla.jpg', 1, 1),
-(6, 2, 2014, 'P987654', '15.00', 'Manual ', 4, 4, 'No', '1.8', 'No', 'corrolla.jpg', 1, 1),
-(8, 2, 2019, 'P984327', '20.00', 'Automático ', 5, 4, 'No', '2.0', 'Si', 'corrolla.jpg', 1, 0),
-(9, 3, 2015, 'P765490', '20.00', 'Manual', 5, 4, 'Si', '2.0', 'Si', 'lancer.jpg', 1, 1),
-(19, 3, 2020, 'P123890', '15.00', 'Automática ', 5, 4, 'Si', '1.8', 'Si', 'lancer.jpg', 1, 0);
+(1, 1, 2012, 'P606050', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/2014_Toyota_Yaris_1.5_XLi_in_Chile.jpg', 1, 1),
+(2, 1, 2019, 'P606061', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 0),
+(3, 1, 2018, 'P962610', '10.00', 'Manual', 5, 4, 'Si', '1.5', 'Si', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/2014_Toyota_Yaris_1.5_XLi_in_Chile.jpg', 1, 0),
+(4, 2, 2018, 'P959500', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 0),
+(5, 2, 2016, 'P959501', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 1),
+(6, 2, 2014, 'P987654', '15.00', 'Manual ', 4, 4, 'No', '1.8', 'No', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 1),
+(8, 2, 2019, 'P984327', '20.00', 'Automático ', 5, 4, 'No', '2.0', 'Si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 0),
+(9, 3, 2015, 'P765490', '20.00', 'Manual', 5, 4, 'Si', '2.0', 'Si', 'https://m.media-amazon.com/images/I/71ksk7ZPahL.jpg', 1, 1),
+(19, 3, 2020, 'P123890', '15.00', 'Automática ', 5, 4, 'Si', '1.8', 'Si', 'https://m.media-amazon.com/images/I/71ksk7ZPahL.jpg', 1, 0);
 
 -- --------------------------------------------------------
 
