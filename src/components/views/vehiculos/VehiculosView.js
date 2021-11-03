@@ -17,25 +17,7 @@ import PaginationList from "../../common/web/vehiculos/PagList";
 //URL API
 import { urlAutosWeb } from "../../../consts/URLs";
 
-import AutosJSON from "../../../assets/json/autos.json";
-import ModelosJSON from "../../../assets/json/modelos.json";
-
-/*const autos = AutosJSON;
-
-const modelo = ModelosJSON;
-
-const Objeto = () => {
-  autos.map((u, i) => {
-    modelo.map((m, j) => {
-      if (u.idmodelo === m.id) {
-        u.idmodelo = m;
-      }
-    });
-  });
-};*/
-
 const VehiculosView = () => {
-  /*Objeto();*/
   const [nombre, setNombre] = useState("");
   const [marca, setMarca] = useState("");
   const [año, setAño] = useState(0);
