@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import Saludo from '../views/saludo/Saludo';
@@ -8,10 +8,19 @@ import Modelo from '../views/Modelos/Modelos'
 import Alquiler from '../views/Alquileres/Alquileres'
 import Vehiculos from '../views/vehiculos/Vehiculos';
 import {Logout} from '../views/logout/Logout';
+import Profile from '../views/profile/Profile';
+
+import Login from '../views/login/Login';
+
+//Context auth
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Drawer = createDrawerNavigator();
 
-const Navigation = ({setAuth, auth}) => {
+const Navigation = () => {
+
+    const { auth } = useContext(AuthContext);
+
     if(auth)
     {
         return(
@@ -31,11 +40,17 @@ const Navigation = ({setAuth, auth}) => {
                     <Drawer.Screen name='Modelos' component={Modelo} />
                     <Drawer.Screen name='Alquileres' component={Alquiler} />
                     <Drawer.Screen name='Clientes' component={Cliente} />
-                    <Drawer.Screen name='Perfil' component={Saludo} />
-                    <Drawer.Screen name='Salir' component={Logout} initialParams = {{ setAuth: setAuth }} />
+                    <Drawer.Screen name='Perfil' component={Profile} />
+                    <Drawer.Screen name='Salir' component={Logout} />
                 </Drawer.Navigator>
             </NavigationContainer>
         )
+    }
+    else
+    {
+        return(
+            <Login />
+        ) 
     }
 }
 

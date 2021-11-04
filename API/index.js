@@ -25,7 +25,7 @@ app.use('/api/alquileres/', alquiler);
 app.use('/api/auth/', auth)
 
 //Puerto que va usar NODE
-const port = 3000;
+const port = 3001;
 //listen estara escuchando el puerto 3000
 app.listen( port, () => {
     console.log('Apicacion ejecutandose...');

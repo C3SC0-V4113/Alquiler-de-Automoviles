@@ -1,9 +1,9 @@
 import React from 'react';
 import LoginView from './LoginView';
 
-const Login = ({ setAuth }) => {
+const Login = () => {
     return(
-        <LoginView setAuth = { setAuth } />
+        <LoginView  />
     )
 }
 

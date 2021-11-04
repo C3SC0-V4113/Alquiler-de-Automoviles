@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+
+import { AuthContext } from '../../../contexts/AuthContext';
 
 //LOGOUT PARA MOVIL
-export const Logout = ({ route }) => {
+export const Logout = () => {
     
+    const { changeAuth } = useContext(AuthContext);
+
     useEffect( () => {
-        route.params.setAuth(false);
+        changeAuth();
     }, [])
 
     return null

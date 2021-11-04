@@ -1,5 +1,5 @@
 //IP DEL SERVIDOR
-export const IPServer = 'http://192.168.1.6:3000';
+export const IPServer = 'http://192.168.1.6:3001';
 
 //URL'S PARA LAS PETICIONES A LA API
 export const urlAutos = `${IPServer}/api/autos/`;
