@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 import FetchAPI from "../../../utils/FetchAPI";
 import PaginationList from "../../common/web/vehiculos/PagList";
-
+import ModalEdit from "../../common/web/vehiculos/ModalEdit";
 //URL API
 import { urlAutosWeb } from "../../../consts/URLs";
 
@@ -46,34 +46,17 @@ const VehiculosView = () => {
     });
   };
 
-  const obtenerData = (name, brand, year, id, price, img) => {
+  /*const obtenerData = (name, brand, year, id, price, img) => {
     setNombre(name);
     setMarca(brand);
     setAño(year);
     setPlaca(id);
     setPrecio(price);
     setImagen(img);
-  };
+  };*/
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header>
-          <Modal.Title>Agregar y Editar</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Container>
-            <Row></Row>
-          </Container>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Cerrar
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Guardar Cambios
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ModalEdit show={show} handleClose={handleClose} />
       <Container fluid>
         <Row>
           <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
