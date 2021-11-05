@@ -12,25 +12,20 @@ import {
   Modal,
 } from "react-bootstrap";
 import FetchAPI from "../../../utils/FetchAPI";
+//Componentes de Vehiculos
 import PaginationList from "../../common/web/vehiculos/PagList";
 import ModalEdit from "../../common/web/vehiculos/ModalEdit";
 //URL API
 import { urlAutosWeb } from "../../../consts/URLs";
 
 const VehiculosView = () => {
-  const [nombre, setNombre] = useState("");
-  const [marca, setMarca] = useState("");
-  const [año, setAño] = useState(0);
-  const [placa, setPlaca] = useState("");
-  const [precio, setPrecio] = useState(0);
-  const [imagen, setImagen] = useState(
-    "https://tdrresearch.azureedge.net/photos/chrome/Expanded/White/2019HOC020005/2019HOC02000501.jpg"
-  );
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [autos, setAutos] = useState([]);
+  const [idAuto, setIdAuto] = useState(0);
+  const [alert, setAlert] = useState(false);
 
   useEffect(() => {
     if (!show) {
@@ -56,7 +51,7 @@ const VehiculosView = () => {
   };*/
   return (
     <>
-      <ModalEdit show={show} handleClose={handleClose} />
+      <ModalEdit show={show} idAuto={idAuto} handleClose={handleClose} />
       <Container fluid>
         <Row>
           <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
@@ -78,7 +73,7 @@ const VehiculosView = () => {
             </Button>
           </Col>
         </Row>
-        <PaginationList autos={autos} handleShow={handleShow} />
+        <PaginationList autos={autos} setIdAuto={setIdAuto} handleShow={handleShow} />
         <Row
           className="mt-5"
           style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}

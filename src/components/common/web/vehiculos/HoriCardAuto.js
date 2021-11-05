@@ -77,7 +77,10 @@ const HorizontalCard = (props) => {
       </Col>
       <Col xs={12} md={3} className="d-grid gap-2 p-5">
         <Button
-          onClick={props.handleShow}
+          onClick={() => {
+            props.handleShow();
+            props.setIdAuto(props.item.id_auto_PK);
+          }}
           style={{
             backgroundColor: "#F7B569",
             color: "#f9f9f9",
@@ -89,7 +92,14 @@ const HorizontalCard = (props) => {
         >
           Editar
         </Button>
-        <Button variant="danger" size="lg" type="submit">
+        <Button
+          onClick={() => {
+            props.setIdAuto(props.item.id_auto_PK);
+          }}
+          variant="danger"
+          size="lg"
+          type="submit"
+        >
           Eliminar
         </Button>
       </Col>

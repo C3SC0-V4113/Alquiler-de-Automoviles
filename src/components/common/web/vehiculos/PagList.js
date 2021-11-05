@@ -59,7 +59,12 @@ const PaginationList = (props) => {
         /*console.log(autos)*/
         props.autos.slice(minimo, maximo).map(function (item, i) {
           return (
-            <HorizontalCard item={item} i={i} handleShow={props.handleShow} />
+            <HorizontalCard
+              setIdAuto={props.setIdAuto}
+              item={item}
+              i={i}
+              handleShow={props.handleShow}
+            />
           );
         })
       }
