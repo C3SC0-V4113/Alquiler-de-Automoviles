@@ -9,7 +9,6 @@ import {
   Button,
   Card,
   Pagination,
-  FloatingLabel,
   Modal,
   FormCheck,
   FormControl,
@@ -176,18 +175,13 @@ const ModalEdit = (props) => {
         <Container>
           <Form>
             <Form.Group>
-              <FloatingLabel label="Marca">
-                <Form.Control></Form.Control>
-              </FloatingLabel>
-              <FloatingLabel label="Modelo">
-                <Form.Control></Form.Control>
-              </FloatingLabel>
-              <FloatingLabel label="Año">
-                <Form.Control></Form.Control>
-              </FloatingLabel>
-              <FloatingLabel label="Placa">
-                <Form.Control></Form.Control>
-              </FloatingLabel>
+              <Form.Control></Form.Control>
+
+              <Form.Control></Form.Control>
+
+              <Form.Control></Form.Control>
+
+              <Form.Control></Form.Control>
             </Form.Group>
           </Form>
         </Container>
