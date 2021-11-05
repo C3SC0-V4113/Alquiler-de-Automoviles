@@ -175,13 +175,30 @@ const ModalEdit = (props) => {
         <Container>
           <Form>
             <Form.Group>
-              <Form.Control></Form.Control>
-
-              <Form.Control></Form.Control>
-
-              <Form.Control></Form.Control>
-
-              <Form.Control></Form.Control>
+              <Form.Label>Marca</Form.Label>
+              <Form.Control/>
+              <Form.Label>Modelo</Form.Label>
+              <Form.Control/>
+              <Form.Label>Año</Form.Label>
+              <Form.Control/>
+              <Form.Label>Placa</Form.Label>
+              <Form.Control/>
+              <Form.Label>Transmisión</Form.Label>
+              <Form.Control/>
+              <Form.Label>Pasajeros</Form.Label>
+              <Form.Control/>
+              <Form.Label>Puertas</Form.Label>
+              <Form.Control/>
+              <Form.Label>A/C</Form.Label>
+              <Form.Control/>
+              <Form.Label>Motor</Form.Label>
+              <Form.Control/>
+              <Form.Label>Vidrios Electricos</Form.Label>
+              <Form.Control/>
+              <Form.Label>Precio/Dia</Form.Label>
+              <Form.Control/>
+              <Form.Label>Imagen</Form.Label>
+              <Form.Control/>
             </Form.Group>
           </Form>
         </Container>
