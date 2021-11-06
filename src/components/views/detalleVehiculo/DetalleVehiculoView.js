@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Col, Container, Row, Table, Form, Button } from 'react-bootstrap';
+import { AuthContext } from '../../../contexts/AuthContext';
 import './style.css'
 
 const DetalleVehiculoView = () => {
+
+    const store = useContext(AuthContext);
+
     return(
         <Container fluid='lg' >
             <h1 className = 'title'>Detalle de Alquiler</h1>

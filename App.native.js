@@ -10,6 +10,18 @@ export default function App() {
     const [ auth, setAuth ] = useState(false);
     const [ typeUser, setTypeUser ] = useState(0);
     const [ idUser, setIdUser ] = useState(0);
+    const [ idVehiculo, setIdVehiculo ] = useState(0);
+    const [ infoAlqui, setInfoAlqui ] = useState({
+    entrega: {
+        lugar: '',
+        fecha: ''
+    },
+    devolucion: {
+        lugar: '',
+        fecha: ''
+    },
+    precio_neto: 0 })
+    
     const changeAuth = () => setAuth(!auth);
 
     const dataAuth = {
@@ -18,7 +30,11 @@ export default function App() {
         setIdUser,
         typeUser,
         idUser,
-        auth
+        auth,
+        idVehiculo,
+        setIdVehiculo,
+        infoAlqui,
+        setInfoAlqui
     }
 
     return(

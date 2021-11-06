@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { useNavigation } from '@react-navigation/native';
+
+//Context dee Auth
+import { AuthContext } from '../../contexts/AuthContext';
+
 const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
+
+    const navigation = useNavigation();
+
+    const { typeUser, setIdVehiculo, setInfoAlqui, infoAlqui } = useContext( AuthContext );
 
     const { id_auto_PK, anio, placa, precio_dia, transmision, pasajeros, puertas, ac, motor, vidrios_electricos, imagen, modelo} = data.item;
     
@@ -41,20 +50,36 @@ const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
                         <Icon name = 'car-shift-pattern' size={18} color="white" style = { [styles.babge, { width: '50%' }] }> {transmision}</Icon>
                     </View>
                 </View>
-                <View style = { styles.containerButton } >
-                    <Button 
-                        title = 'Editar' 
-                        containerStyle = { styles.button } 
-                        buttonStyle = {{ backgroundColor: '#F7B661', borderRadius: 0 }}
-                        onPress = { () => {setIdAuto(id_auto_PK); setModalVisible(true) } }
-                    />
-                    <Button 
-                        title = 'Eliminar' 
-                        containerStyle = { styles.button } 
-                        buttonStyle = {{ backgroundColor: '#FF000090', borderRadius: 0 }}
-                        onPress = { () => {setIdAuto(id_auto_PK); setAlert(true) } }
-                    />
-                </View>
+                { typeUser === 3 ? (
+                    <View style = { styles.containerButton } >
+                        <Button 
+                            title = 'Elegir vehículo' 
+                            containerStyle = { styles.buttonSelect } 
+                            buttonStyle = {{ backgroundColor: '#F7B661', borderRadius: 0 }}
+                            onPress = { () => { 
+                                setIdVehiculo(id_auto_PK); 
+                                setInfoAlqui({ ...infoAlqui, precio_neto: Number(precio_dia) })
+                                navigation.navigate('Alquileres'); 
+                            } }
+                        />
+                    </View>
+                ):(
+                    <View style = { styles.containerButton } >
+                        <Button 
+                            title = 'Editar' 
+                            containerStyle = { styles.button } 
+                            buttonStyle = {{ backgroundColor: '#F7B661', borderRadius: 0 }}
+                            onPress = { () => {setIdAuto(id_auto_PK); setModalVisible(true) } }
+                        />
+                        <Button 
+                            title = 'Eliminar' 
+                            containerStyle = { styles.button } 
+                            buttonStyle = {{ backgroundColor: '#FF000090', borderRadius: 0 }}
+                            onPress = { () => {setIdAuto(id_auto_PK); setAlert(true) } }
+                        />
+                    </View>
+                ) }
+                
             </View>
         </Card>
     )
@@ -99,6 +124,9 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 5,
         textAlign: 'center',
+    },
+    buttonSelect: {
+        width: '100%',
     }
 });
 

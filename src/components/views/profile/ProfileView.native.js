@@ -36,6 +36,7 @@ const ProfileView = () => {
         getUser()
     }, [])
     
+    //FUNCION PARA OBTENER LOS DATOS DEL USUARIO LOGGEADO
     const getUser = () => {
         const userAPI = FetchAPI(`${urlUsuarios}${idUser}`, 'GET');
 
@@ -292,7 +293,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     input: {
-        height: 40,
+        height: 50,
         backgroundColor: '#F0F0F060',
         color: '#F5F3EA',
         paddingLeft: 5,

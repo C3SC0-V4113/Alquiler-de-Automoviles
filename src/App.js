@@ -15,11 +15,26 @@ import { AuthContext } from "./contexts/AuthContext";
 function App() { 
     const [ typeUser, setTypeUser ] = useState(0);// Tipos de usuario: 1-Administrador, 2-Empleado, 3-Cliente
     const [ isAuth, setIsAuth ] = useState(false);
+    const [ idUser, setIdUser ] = useState(0);
+    const [ idVehiculo, setIdVehiculo ] = useState(0);
 
     const dataAuth = {
         isAuth,
+        idUser,
+        setIdUser,
         setIsAuth,
-        setTypeUser
+        setTypeUser,
+        idVehiculo,
+        setIdVehiculo,
+        entrega: {
+            lugar: '',
+            fecha: ''
+        },
+        devolucion: {
+            lugar: '',
+            fecha: ''
+        },
+        precio_neto: 0
     }
 
     const changeAuth = () => setIsAuth(!isAuth);
