@@ -1,18 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Badge,
-  Container,
-  Row,
-  Col,
-  Image,
-  Form,
-  Button,
-  Card,
-  Pagination,
-  Modal,
-  FormCheck,
-  FormControl,
-} from "react-bootstrap";
+import { Container, Form, Button, Modal } from "react-bootstrap";
 /*Llamando APIS y sus URLS */
 import FetchAPI from "../../../../utils/FetchAPI";
 import {
@@ -36,35 +23,20 @@ const ModalEdit = (props) => {
     imagen: "",
     id_estado_auto: 1,
   });
-  const [modelo, setModelo] = useState(0);
-  const [año, setAño] = useState(0);
-  const [placa, setPlaca] = useState("");
-  const [precio, setPrecio] = useState(0);
-  const [transmision, setTransmision] = useState("");
-  const [pasajeros, setPasajeros] = useState(0);
-  const [puertas, setPuertas] = useState(0);
-  const [ac, setAC] = useState("");
-  const [motor, setMotor] = useState(0);
-  const [vidrios, setVidrios] = useState("");
-  const [imagen, setImagen] = useState(
-    "https://tdrresearch.azureedge.net/photos/chrome/Expanded/White/2019HOC020005/2019HOC02000501.jpg"
-  );
-  const [estado, setEstado] = useState(0);
-  const [checked, setChecked] = useState(false);
+
   const [marca, setMarca] = useState(0);
 
   /*Datos de tablas externas */
   const [marcas, setMarcas] = useState([]);
   const [modelos, setModelos] = useState([]);
 
-  useEffect(()=>{
-      console.log("Cargando marcas...");
-      let marcasAPI = FetchAPI(urlMarcasWeb, "GET", {});
-      marcasAPI.then((data) => {
-        setMarcas([...data.marcas]);
-      });
-    
-  },[props.show])
+  useEffect(() => {
+    console.log("Cargando marcas...");
+    let marcasAPI = FetchAPI(urlMarcasWeb, "GET", {});
+    marcasAPI.then((data) => {
+      setMarcas([...data.marcas]);
+    });
+  }, [props.show]);
 
   //PARA OBTENER MODELOS
   useEffect(() => {
@@ -80,7 +52,6 @@ const ModalEdit = (props) => {
 
   //FUNCION PARA CREAR LOS AUTOS
   const createVehiculo = () => {
-    alert("Creando Vehiculo...");
     let vehiculoNew = FetchAPI(urlAutosWeb, "POST", data);
     vehiculoNew
       .then((data) => {
@@ -96,7 +67,6 @@ const ModalEdit = (props) => {
 
   //FUNCION PARA MODIFICAR LOS AUTOS
   const updateVehiculo = () => {
-    alert("Actualizando Vehiculo...");
     const autoAPI = FetchAPI(`${urlAutosWeb}${data.id_auto}`, "PUT", data);
 
     autoAPI
@@ -191,10 +161,15 @@ const ModalEdit = (props) => {
           <Form>
             <Form.Group>
               <Form.Label>Marca</Form.Label>
-              <Form.Control onChange={(item) => setMarca(item.target.value)} as="select">
+              <Form.Control
+                onChange={(item) => setMarca(item.target.value)}
+                as="select"
+              >
                 <option>Seleccione una marca</option>
                 {marcas.map((item, i) => (
-                  <option key={i} value={item.id_marca_PK}>{item.marca}</option>
+                  <option key={i} value={item.id_marca_PK}>
+                    {item.marca}
+                  </option>
                 ))}
               </Form.Control>
               <Form.Label>Modelo</Form.Label>
@@ -206,7 +181,9 @@ const ModalEdit = (props) => {
               >
                 <option>Seleccione un Modelo</option>
                 {modelos.map((item, i) => (
-                  <option key={i} value={item.id_modelos_PK}>{item.modelo}</option>
+                  <option key={i} value={item.id_modelos_PK}>
+                    {item.modelo}
+                  </option>
                 ))}
               </Form.Control>
               <Form.Label>Año</Form.Label>

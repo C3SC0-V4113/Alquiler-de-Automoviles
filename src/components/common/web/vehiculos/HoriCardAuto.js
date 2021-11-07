@@ -1,16 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Badge,
-  Container,
-  Row,
-  Col,
-  Image,
-  Form,
-  Button,
-  Card,
-  Pagination,
-  Modal,
-} from "react-bootstrap";
+import React from "react";
+import { Row, Col, Image, Button } from "react-bootstrap";
 
 const HorizontalCard = (props) => {
   return (
@@ -95,8 +84,6 @@ const HorizontalCard = (props) => {
         <Button
           onClick={() => {
             props.setIdAuto(props.item.id_auto_PK);
-            console.log(props.item.id_auto_PK);
-            console.log("hola desde antes de la alerta");
             props.setAlert(true);
           }}
           variant="danger"

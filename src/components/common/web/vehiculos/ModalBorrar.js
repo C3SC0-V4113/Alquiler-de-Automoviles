@@ -1,24 +1,10 @@
-import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Badge,
-  Container,
-  Row,
-  Col,
-  Image,
-  Form,
-  Button,
-  Card,
-  Pagination,
-  Modal,
-  FormCheck,
-  FormControl,
-} from "react-bootstrap";
+import React from "react";
+import { Alert, Button, Modal } from "react-bootstrap";
 
 const ModalBorrar = (props) => {
   return (
     <Modal show={props.show} onHide={props.handleClose}>
-      <Alert variant="danger">
+      <Alert style={{marginBottom: 0}} variant="danger">
         <Alert.Heading>{props.title}</Alert.Heading>
         <p>{props.message}</p>
         <hr />

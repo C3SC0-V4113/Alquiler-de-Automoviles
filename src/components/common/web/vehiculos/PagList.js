@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-  Badge,
-  Container,
-  Row,
-  Col,
-  Image,
-  Form,
-  Button,
-  Card,
-  Pagination,
-  Modal,
-} from "react-bootstrap";
+import React, { useState } from "react";
+import { Pagination } from "react-bootstrap";
+
+/**
+ * COMPONENTE DE TARJETA DE AUTO
+ */
 import HorizontalCard from "./HoriCardAuto";
 
 const PaginationList = (props) => {
@@ -55,21 +48,18 @@ const PaginationList = (props) => {
 
   return (
     <>
-      {
-        /*console.log(autos)*/
-        props.autos.slice(minimo, maximo).map(function (item, i) {
-          return (
-            <HorizontalCard
-              key={i}
-              setIdAuto={props.setIdAuto}
-              item={item}
-              i={i}
-              handleShow={props.handleShow}
-              setAlert={props.setAlert}
-            />
-          );
-        })
-      }
+      {props.autos.slice(minimo, maximo).map(function (item, i) {
+        return (
+          <HorizontalCard
+            key={i}
+            setIdAuto={props.setIdAuto}
+            item={item}
+            i={i}
+            handleShow={props.handleShow}
+            setAlert={props.setAlert}
+          />
+        );
+      })}
       <Pagination size="lg" className="justify-content-end px-5">
         {items}
       </Pagination>

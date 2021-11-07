@@ -1,16 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Badge,
-  Container,
-  Row,
-  Col,
-  Image,
-  Form,
-  Button,
-  Card,
-  Pagination,
-  Modal,
-} from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import FetchAPI from "../../../utils/FetchAPI";
 //Componentes de Vehiculos
 import PaginationList from "../../common/web/vehiculos/PagList";
@@ -58,20 +47,18 @@ const VehiculosView = () => {
       });
   };
 
-  /*const obtenerData = (name, brand, year, id, price, img) => {
-    setNombre(name);
-    setMarca(brand);
-    setAño(year);
-    setPlaca(id);
-    setPrecio(price);
-    setImagen(img);
-  };*/
-  const eliminarText="Eliminar vehículo";
-  const eliminarMes="¿Desea eliminar el vehículo?";
+  const eliminarText = "Eliminar vehículo";
+  const eliminarMes = "¿Desea eliminar el vehículo?";
   return (
     <>
       <ModalEdit show={show} idAuto={idAuto} handleClose={handleCloseDel} />
-      <ModalBorrar show={alert} title={eliminarText} message={eliminarMes} setAlert={setAlert} action={deleteVehiculo}/>
+      <ModalBorrar
+        show={alert}
+        title={eliminarText}
+        message={eliminarMes}
+        setAlert={setAlert}
+        action={deleteVehiculo}
+      />
       <Container fluid>
         <Row>
           <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
