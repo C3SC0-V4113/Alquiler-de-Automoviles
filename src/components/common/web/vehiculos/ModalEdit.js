@@ -50,22 +50,26 @@ const ModalEdit = (props) => {
     "https://tdrresearch.azureedge.net/photos/chrome/Expanded/White/2019HOC020005/2019HOC02000501.jpg"
   );
   const [estado, setEstado] = useState(0);
+  const [checked, setChecked] = useState(false);
   const [marca, setMarca] = useState(0);
 
   /*Datos de tablas externas */
   const [marcas, setMarcas] = useState([]);
   const [modelos, setModelos] = useState([]);
 
-  useEffect(() => {
-    let marcasAPI = FetchAPI(urlMarcasWeb, "GET", {});
-    marcasAPI.then((data) => {
-      setMarcas([...data.marcas]);
-    });
-  }, []);
+  useEffect(()=>{
+      console.log("Cargando marcas...");
+      let marcasAPI = FetchAPI(urlMarcasWeb, "GET", {});
+      marcasAPI.then((data) => {
+        setMarcas([...data.marcas]);
+      });
+    
+  },[props.show])
 
   //PARA OBTENER MODELOS
   useEffect(() => {
     if (marca != 0) {
+      console.log("Cargando modelos...");
       let ModelosAPi = FetchAPI(`${urlModelosWeb}/${marca}`, "GET", {});
       ModelosAPi.then((data) => {
         //SE GUARDAN LOS MODELOS
@@ -76,6 +80,7 @@ const ModalEdit = (props) => {
 
   //FUNCION PARA CREAR LOS AUTOS
   const createVehiculo = () => {
+    alert("Creando Vehiculo...");
     let vehiculoNew = FetchAPI(urlAutosWeb, "POST", data);
     vehiculoNew
       .then((data) => {
@@ -91,13 +96,14 @@ const ModalEdit = (props) => {
 
   //FUNCION PARA MODIFICAR LOS AUTOS
   const updateVehiculo = () => {
+    alert("Actualizando Vehiculo...");
     const autoAPI = FetchAPI(`${urlAutosWeb}${data.id_auto}`, "PUT", data);
 
     autoAPI
       .then((data) => {
         console.log(data);
         reset();
-        setModalVisible(false);
+        props.handleClose();
       })
       .catch((err) => {
         console.log(err);
@@ -166,6 +172,15 @@ const ModalEdit = (props) => {
     setModelos([]);
   };
 
+  //Controlador de Edicion/Agregar
+  const Desicion = () => {
+    if (props.idAuto === 0) {
+      createVehiculo();
+    } else {
+      updateVehiculo();
+    }
+  };
+
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Modal.Header>
@@ -176,39 +191,111 @@ const ModalEdit = (props) => {
           <Form>
             <Form.Group>
               <Form.Label>Marca</Form.Label>
-              <Form.Control as="select">
+              <Form.Control onChange={(item) => setMarca(item.target.value)} as="select">
                 <option>Seleccione una marca</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                {marcas.map((item, i) => (
+                  <option key={i} value={item.id_marca_PK}>{item.marca}</option>
+                ))}
               </Form.Control>
               <Form.Label>Modelo</Form.Label>
-              <Form.Control as="select">
+              <Form.Control
+                onChange={(item) =>
+                  setData({ ...data, id_modelo: item.target.value })
+                }
+                as="select"
+              >
                 <option>Seleccione un Modelo</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                {modelos.map((item, i) => (
+                  <option key={i} value={item.id_modelos_PK}>{item.modelo}</option>
+                ))}
               </Form.Control>
               <Form.Label>Año</Form.Label>
-              <Form.Control />
+              <Form.Control
+                placeholder={data.anio}
+                onChange={(text) =>
+                  setData({ ...data, anio: text.target.value })
+                }
+                type="number"
+              />
               <Form.Label>Placa</Form.Label>
-              <Form.Control />
+              <Form.Control
+                placeholder={data.placa}
+                onChange={(text) =>
+                  setData({ ...data, placa: text.target.value })
+                }
+              />
               <Form.Label>Transmisión</Form.Label>
-              <Form.Control />
+              <Form.Control
+                onChange={(text) =>
+                  setData({ ...data, transmision: text.target.value })
+                }
+                as="select"
+              >
+                <option>Seleccione el tipo de caja</option>
+                <option value="Automática">Automática</option>
+                <option value="Manual">Manual</option>
+              </Form.Control>
               <Form.Label>Pasajeros</Form.Label>
-              <Form.Control />
+              <Form.Control
+                placeholder={data.pasajeros}
+                onChange={(text) =>
+                  setData({ ...data, pasajeros: text.target.value })
+                }
+                type="number"
+              />
               <Form.Label>Puertas</Form.Label>
-              <Form.Control />
-              <Form.Label>A/C</Form.Label>
-              <Form.Control />
+              <Form.Control
+                placeholder={data.puertas}
+                onChange={(text) =>
+                  setData({ ...data, puertas: text.target.value })
+                }
+                type="number"
+              />
               <Form.Label>Motor</Form.Label>
-              <Form.Control />
-              <Form.Label>Vidrios Electricos</Form.Label>
-              <Form.Control />
+              <Form.Control
+                placeholder={data.motor}
+                onChange={(text) =>
+                  setData({ ...data, motor: text.target.value })
+                }
+                type="number"
+              />
+              <Form.Label>A/C</Form.Label>
+              <Form.Control
+                onChange={(text) => setData({ ...data, ac: text.target.value })}
+                as="select"
+              >
+                <option>Seleccione el tipo de caja</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </Form.Control>
+              <Form.Label>Vidrios Eléctricos</Form.Label>
+              <Form.Control
+                onChange={(text) =>
+                  setData({ ...data, vidrios_electricos: text.target.value })
+                }
+                as="select"
+              >
+                <option>Seleccione el tipo de caja</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+              </Form.Control>
               <Form.Label>Precio/Dia</Form.Label>
-              <Form.Control />
+              <Form.Control
+                placeholder={data.precio_dia}
+                onChange={(text) =>
+                  setData({ ...data, precio_dia: text.target.value })
+                }
+                type="number"
+              />
               <Form.Label>Imagen</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Control
+                placeholder={data.imagen}
+                onChange={(text) =>
+                  setData({ ...data, imagen: text.target.value })
+                }
+                as="textarea"
+                rows={3}
+              />
             </Form.Group>
           </Form>
         </Container>
@@ -217,7 +304,7 @@ const ModalEdit = (props) => {
         <Button variant="secondary" onClick={props.handleClose}>
           Cerrar
         </Button>
-        <Button variant="primary" onClick={props.handleClose}>
+        <Button variant="primary" onClick={(props.handleClose, Desicion)}>
           Guardar Cambios
         </Button>
       </Modal.Footer>

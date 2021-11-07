@@ -61,6 +61,10 @@ const VehiculosView = () => {
         <Row className="text-end mb-5">
           <Col className="px-5" xs={12}>
             <Button
+              onClick={() => {
+                setIdAuto(0);
+                handleShow();
+              }}
               style={{
                 backgroundColor: "#1E2430",
                 color: "#f9f9f9",
@@ -73,7 +77,11 @@ const VehiculosView = () => {
             </Button>
           </Col>
         </Row>
-        <PaginationList autos={autos} setIdAuto={setIdAuto} handleShow={handleShow} />
+        <PaginationList
+          autos={autos}
+          setIdAuto={setIdAuto}
+          handleShow={handleShow}
+        />
         <Row
           className="mt-5"
           style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}

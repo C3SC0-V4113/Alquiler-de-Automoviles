@@ -25,7 +25,7 @@ const HorizontalCard = (props) => {
         <h3>
           Placa:{" "}
           <span
-            class="badge rounded-pill"
+            className="badge rounded-pill"
             style={{
               backgroundColor: "#F7B569",
               color: "#f9f9f9",
@@ -38,7 +38,7 @@ const HorizontalCard = (props) => {
         <h3>
           Año:{" "}
           <span
-            class="badge rounded-pill"
+            className="badge rounded-pill"
             style={{
               backgroundColor: "#F7B569",
               color: "#f9f9f9",
@@ -51,7 +51,7 @@ const HorizontalCard = (props) => {
         <h3>
           Transmision:{" "}
           <span
-            class="badge rounded-pill"
+            className="badge rounded-pill"
             style={{
               backgroundColor: "#F7B569",
               color: "#f9f9f9",
@@ -64,7 +64,7 @@ const HorizontalCard = (props) => {
         <h3>
           Pasajeros:{" "}
           <span
-            class="badge rounded-pill"
+            className="badge rounded-pill"
             style={{
               backgroundColor: "#F7B569",
               color: "#f9f9f9",
