@@ -95,6 +95,9 @@ const HorizontalCard = (props) => {
         <Button
           onClick={() => {
             props.setIdAuto(props.item.id_auto_PK);
+            console.log(props.item.id_auto_PK);
+            console.log("hola desde antes de la alerta");
+            props.setAlert(true);
           }}
           variant="danger"
           size="lg"

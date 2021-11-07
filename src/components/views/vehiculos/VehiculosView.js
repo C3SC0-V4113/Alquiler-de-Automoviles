@@ -15,6 +15,7 @@ import FetchAPI from "../../../utils/FetchAPI";
 //Componentes de Vehiculos
 import PaginationList from "../../common/web/vehiculos/PagList";
 import ModalEdit from "../../common/web/vehiculos/ModalEdit";
+import ModalBorrar from "../../common/web/vehiculos/ModalBorrar";
 //URL API
 import { urlAutosWeb } from "../../../consts/URLs";
 
@@ -22,6 +23,8 @@ const VehiculosView = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleCloseDel = () => setShow(false);
 
   const [autos, setAutos] = useState([]);
   const [idAuto, setIdAuto] = useState(0);
@@ -41,6 +44,20 @@ const VehiculosView = () => {
     });
   };
 
+  //FUNCION PARA ELIMINAR VEHICULOS
+  const deleteVehiculo = () => {
+    const autoAPI = FetchAPI(`${urlAutosWeb}${idAuto}`, "DELETE", {});
+
+    autoAPI
+      .then((data) => {
+        getAutos();
+        setAlert(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   /*const obtenerData = (name, brand, year, id, price, img) => {
     setNombre(name);
     setMarca(brand);
@@ -49,9 +66,12 @@ const VehiculosView = () => {
     setPrecio(price);
     setImagen(img);
   };*/
+  const eliminarText="Eliminar vehículo";
+  const eliminarMes="¿Desea eliminar el vehículo?";
   return (
     <>
-      <ModalEdit show={show} idAuto={idAuto} handleClose={handleClose} />
+      <ModalEdit show={show} idAuto={idAuto} handleClose={handleCloseDel} />
+      <ModalBorrar show={alert} title={eliminarText} message={eliminarMes} setAlert={setAlert} action={deleteVehiculo}/>
       <Container fluid>
         <Row>
           <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
@@ -81,6 +101,7 @@ const VehiculosView = () => {
           autos={autos}
           setIdAuto={setIdAuto}
           handleShow={handleShow}
+          setAlert={setAlert}
         />
         <Row
           className="mt-5"
