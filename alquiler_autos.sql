@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 03-11-2021 a las 06:26:58
+-- Tiempo de generación: 07-11-2021 a las 04:23:35
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 8.0.0
 
@@ -79,14 +79,17 @@ CREATE TABLE `autos` (
 
 INSERT INTO `autos` (`id_auto_PK`, `id_modelo_FK`, `anio`, `placa`, `precio_dia`, `transmision`, `pasajeros`, `puertas`, `ac`, `motor`, `vidrios_electricos`, `imagen`, `id_estado_auto_FK`, `estado`) VALUES
 (1, 1, 2012, 'P606050', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/2014_Toyota_Yaris_1.5_XLi_in_Chile.jpg', 1, 1),
-(2, 1, 2019, 'P606061', '10.00', 'Automatico', 5, 4, 'si', '1.5', 'si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 0),
+(2, 1, 2018, 'P606060', '15.00', 'Manual', 6, 2, 'Si', '2', 'No', 'https://www.toyota.com.sv/wp-content/uploads/2018/05/Yaris-SD_Gray-Metallic-1G3-1.png', 1, 0),
 (3, 1, 2018, 'P962610', '10.00', 'Manual', 5, 4, 'Si', '1.5', 'Si', 'https://upload.wikimedia.org/wikipedia/commons/d/d3/2014_Toyota_Yaris_1.5_XLi_in_Chile.jpg', 1, 0),
 (4, 2, 2018, 'P959500', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 0),
 (5, 2, 2016, 'P959501', '10.00', 'Automatica', 5, 4, 'Si', '1.8', 'Si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 1),
 (6, 2, 2014, 'P987654', '15.00', 'Manual ', 4, 4, 'No', '1.8', 'No', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 1),
 (8, 2, 2019, 'P984327', '20.00', 'Automático ', 5, 4, 'No', '2.0', 'Si', 'https://www.bookaway.com/media/files/612f40feeec97646ae54af73.jpeg', 1, 0),
 (9, 3, 2015, 'P765490', '20.00', 'Manual', 5, 4, 'Si', '2.0', 'Si', 'https://m.media-amazon.com/images/I/71ksk7ZPahL.jpg', 1, 1),
-(19, 3, 2020, 'P123890', '15.00', 'Automática ', 5, 4, 'Si', '1.8', 'Si', 'https://m.media-amazon.com/images/I/71ksk7ZPahL.jpg', 1, 0);
+(19, 3, 2020, 'P123890', '15.00', 'Automática ', 5, 4, 'Si', '1.8', 'Si', 'https://m.media-amazon.com/images/I/71ksk7ZPahL.jpg', 1, 0),
+(21, 3, 2010, 'P66677', '12.00', 'Automática', 5, 2, 'Si', '2', 'Si', 'https://noticias.coches.com/wp-content/uploads/2014/07/mitsubishi_lancer-mx-e-japan-2010_r9.jpg', 1, 1),
+(22, 2, 2022, 'P123466', '25.00', 'Automática', 4, 4, 'Si', '5', 'No', 'https://www.toyota.com/imgix/content/dam/toyota/jellies/max/2022/corolla/xseapex/1860/1hh/2.png?fm=webp&bg=white&w=768&h=328', 1, 0),
+(23, 2, 2022, 'A666555', '15.00', 'Manual', 4, 4, 'Si', '2.3', 'Si', 'https://www.toyota.com/imgix/content/dam/toyota/jellies/max/2022/corollahybrid/hybridle/1882/089/2.png?fm=webp&bg=white&w=768&h=328', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -269,7 +272,7 @@ ALTER TABLE `alquileres`
 -- AUTO_INCREMENT de la tabla `autos`
 --
 ALTER TABLE `autos`
-  MODIFY `id_auto_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_auto_PK` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `estados_auto`
