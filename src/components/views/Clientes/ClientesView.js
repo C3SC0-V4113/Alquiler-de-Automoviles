@@ -5,7 +5,7 @@ const ClienteView = () => {
     return(
         <View style = {{backgroundColor: ''}}>
             <View styles = { styles.container }>
-                <Text>Alo</Text>
+                <Text>CLIENTES</Text>
                 <TextInput></TextInput>
             </View>
         </View>

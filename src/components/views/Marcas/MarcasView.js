@@ -5,7 +5,7 @@ const MarcasView = () => {
     return(
         <View>
             <View styles = { styles.container }>
-                <Text>Alo</Text>
+                <Text>MARCAS</Text>
                 <TextInput></TextInput>
             </View>
         </View>
