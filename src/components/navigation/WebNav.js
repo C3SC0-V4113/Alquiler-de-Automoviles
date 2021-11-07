@@ -46,6 +46,7 @@ export const WebNavPublic = ({ children, typeUser }) => {
                 <NavDropdown title="Configuración">
                   <NavDropdown.Item>
                     <NavLink
+                      style={{ color: "black" }}
                       to="/public/Marcas"
                       className="nav-link"
                       activeClassName="nav-link active"
@@ -55,6 +56,7 @@ export const WebNavPublic = ({ children, typeUser }) => {
                   </NavDropdown.Item>
                   <NavDropdown.Item>
                     <NavLink
+                      style={{ color: "black" }}
                       to="/public/Modelos"
                       className="nav-link"
                       activeClassName="nav-link active"
@@ -65,6 +67,7 @@ export const WebNavPublic = ({ children, typeUser }) => {
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
                     <NavLink
+                      style={{ color: "black" }}
                       to="/public/Clientes"
                       className="nav-link"
                       activeClassName="nav-link active"
