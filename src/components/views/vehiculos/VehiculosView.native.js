@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Alert, FlatList, View } from 'react-native';
 import CardAuto from '../../common/CardAuto.native';
 import ButtonFloating from '../../common/ButtonFloating.native';
@@ -12,6 +12,9 @@ import { urlAutos } from '../../../consts/URLs';
 //Alert
 import { alertMovilAction } from '../../../utils/Alert';
 
+//Context
+import { AuthContext } from '../../../contexts/AuthContext';
+
 
 const VehiculosView = () => {
     
@@ -19,6 +22,8 @@ const VehiculosView = () => {
     const [ autos, setAutos ] = useState([]);
     const [ idAuto, setIdAuto] = useState(0);
     const [ alert, setAlert ] = useState(false);
+
+    const { typeUser, setIdVehiculo } = useContext(AuthContext)
 
     //FUNCION PARA OBTENER LOS VEHICULOS
     const getAutos = () => {
@@ -68,7 +73,10 @@ const VehiculosView = () => {
                 />
                 
             </View>
-            <ButtonFloating modalVisible = { modalVisible } setModalVisible = { setModalVisible } changeId = { setIdAuto } />
+
+            { typeUser === 3 ? ( null ) : (
+                <ButtonFloating modalVisible = { modalVisible } setModalVisible = { setModalVisible } changeId = { setIdAuto } />
+            ) }
 
             { modalVisible ? (
                 <ModalAuto 

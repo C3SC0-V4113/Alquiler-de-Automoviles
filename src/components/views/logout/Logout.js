@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 
-const Logout = (props) => {
-    console.log(props);
+import { AuthContext } from '../../../contexts/AuthContext';
+
+//LOGOUT PARA MOVIL
+export const Logout = () => {
+    
+    const { changeAuth } = useContext(AuthContext);
+
+    useEffect( () => {
+        changeAuth();
+    }, [])
+
+    return null
 }
 
-export default Logout;
+//LOGOUT PARA WEB
+export const LogoutWeb = () => {}
