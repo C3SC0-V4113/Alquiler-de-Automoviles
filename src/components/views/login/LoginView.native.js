@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
 import Splash from '../splash/SplashView.native';
@@ -15,7 +15,10 @@ import { validationString, validationEmail, validationNumber } from '../../../ut
 //IMPORT DE ALERT
 import { alertMovil } from '../../../utils/Alert';
 
-const LoginView = ({ setAuth }) => {
+//IMPORT DE CONTEXT DE AUTH
+import { AuthContext } from '../../../contexts/AuthContext';
+
+const LoginView = () => {
 
     const [ loading, setLoading ] = useState(true);
     const [ registrar, setRegistrar ] = useState(false);
@@ -32,29 +35,44 @@ const LoginView = ({ setAuth }) => {
         telefono: ''
     });
 
+    const { changeAuth, setTypeUser, setIdUser } = useContext(AuthContext);
+
+    const LoginAPi = () => {
+        const authAPI = FetchAPI(urlAuth, 'POST', datos);
+
+        authAPI.then( user => {
+            if(user.message)
+            {
+                alertMovil('Advertencia', user.message);
+            }
+            else
+            {
+                setIdUser(user.usuario.id)
+                setTypeUser(user.usuario.tipo_usuario)
+                changeAuth();
+            }
+        })
+        .catch( err => {
+            console.log('error:'+err);
+        })
+    }
+
     //FUNCION PARA INICIAR SESION EN EL LOGIN
     const loginUser = () => {
         if( validationString(datos.usuario) )
         {
             if( validationString(datos.password) )
             {
-                const authAPI = FetchAPI(urlAuth, 'POST', datos);
-
-                authAPI.then( user => {
-                    if(user.message)
-                    {
-                        alertMovil('Advertencia', user.message);
-                    }
-                    else
-                    {
-                        setAuth(true);
-                    }
-
-                })
-                .catch( err => {
-                    console.log('error:'+err);
-                })
+                LoginAPi();
             }
+            else
+            {
+                alertMovil('Advertencia', 'Ingrese su contraseña')
+            }
+        }
+        else
+        {
+            alertMovil('Advertencia', 'Ingrese su usuario')
         }
     }
 
