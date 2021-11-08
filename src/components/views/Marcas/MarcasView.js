@@ -15,6 +15,15 @@ const MarcasView = () => {
     marca: "",
     estado: 1,
   });
+  const [texto, setTexto] = useState("Agregar");
+
+  const Desicion = () => {
+    if (marcaid > 0) {
+      UpdateMarca();
+    } else {
+      alert("Agregando...");
+    }
+  };
 
   const getMarcas = () => {
     console.log("Cargando marcas...");
@@ -28,9 +37,12 @@ const MarcasView = () => {
     if (marcaid > 0) {
       console.log("Hola desde la API marca id");
       let marcasAPI = FetchAPI(`${urlMarcasWeb}${marcaid}`, "GET", {});
-      console.log(marcasAPI);
-      marcasAPI.then((data) => {
-        console.log(data);
+      marcasAPI.then((item) => {
+        const { id_marca_PK, marca } = item.marcas[0];
+        console.log(marca);
+        setMarca(marca);
+        setData({ ...item, marca: marca });
+        setTexto("Editar");
       });
     } else {
       console.log("Para agregar");
@@ -44,8 +56,8 @@ const MarcasView = () => {
   const UpdateMarca = () => {
     const marcasAPI = FetchAPI(`${urlMarcasWeb}${marcaid}`, "PUT", data);
     marcasAPI
-      .then((marca) => {
-        console.log(marca);
+      .then((data) => {
+        console.log(data);
       })
       .catch((error) => {
         console.log(console.error());
@@ -67,6 +79,7 @@ const MarcasView = () => {
               <Form.Control
                 onChange={(text) => {
                   setMarca(text.target.value);
+                  setData({ ...data, marca: text.target.value });
                 }}
                 value={marca}
                 size="lg"
@@ -77,6 +90,9 @@ const MarcasView = () => {
         </Col>
         <Col className="mt-4 px-5" xs={4}>
           <Button
+            onClick={() => {
+              Desicion();
+            }}
             style={{
               backgroundColor: "#1E2430",
               color: "#f9f9f9",
@@ -87,7 +103,7 @@ const MarcasView = () => {
             variant="primary"
             type="submit"
           >
-            Agregar
+            {texto}
           </Button>
         </Col>
       </Row>
