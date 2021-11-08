@@ -36,6 +36,22 @@ ruta.get('/:id', (req, res) => {
     })
 })
 
+//PETICION GET (MODELOS POR ID)
+ruta.get('//:id', (req, res) => {
+    let id_marca = req.params.id;
+
+    let result = getModelosID( id_marca );
+    result.then( modelos => {
+        res.json({ modelos })
+    })
+    .catch( err => {
+        res.status(400).json({
+            mensaje: 'Ocurrio un problema al momento de obtener las marcas',
+            err
+        })
+    })
+})
+
 //PETICION POST
 ruta.post('/', (req, res) => {
     let body = req.body;
@@ -114,6 +130,19 @@ async function getModelosMarca( id_marca )
         }
     })
 }
+
+
+//FUNCION PARA OBTENER LOS MODELOS POR ID
+async function getModelosID( id_marca )
+{
+    return await Modelo.findAll({
+        where: {
+            id_modelos_PK: id_marca,
+            estado: 0
+        }
+    })
+}
+
 
 //FUNCION PARA CREAR MODELO DE VEHICULOS
 async function createModelo(body)

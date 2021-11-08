@@ -1,70 +1,76 @@
-import React from 'react';
+import React,{useEffect,useState,useContext} from 'react';
 import { View, Text, StyleSheet, TextInput,ScrollView, TouchableOpacity, FlatList } from 'react-native';
-import { SearchBar } from 'react-native-elements'
-
-const Marcas = [
-    {
-        id: '1',
-        nombre: 'BMW',
-    },
-    {
-        id: '2',
-        nombre: 'Chevrolet',
-    },
-    {
-        id: '3',
-        nombre: 'Dodge',
-    },
-    {
-        id: '4',
-        nombre: 'Ford',
-    },
-    {
-        id: '5',
-        nombre: 'Honda',
-    },
-    {
-        id: '6',
-        nombre: 'Hyundai',
-    },
-    {
-        id: '7',
-        nombre: 'Kya',
-    },
-    {
-        id: '8',
-        nombre: 'Mitsubishi',
-    },
-    {
-        id: '9',
-        nombre: 'Toyota',
-    },
-]
-
+import { urlMarcas } from '../../../consts/URLs';
+import FetchAPI from '../../../utils/FetchAPI';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { alertMovilAction } from '../../../utils/Alert';
+import CardMarca from '../../common/CardMarca.native';
+import ButtonFloating from '../../common/ButtonFloating.native';
+import ModalMarca from '../../common/ModalMarcas.native';
 
 const MarcasView = () => {
+
+    const [ modalVisible, setModalVisible ] = useState(false);
+    const [ Marcas, setMarcas ] = useState([]);
+    const [ idMarca, setIdMarca] = useState(0);
+    const [ alert, setAlert ] = useState(false);
+
+    const { typeUser, setIdVehiculo } = useContext(AuthContext)
+
+    //FUNCION PARA OBTENER LAS MARCAS
+    const getMarcas = () => {
+        let autosAPI = FetchAPI(urlMarcas, 'GET', {});
+        autosAPI.then( data => {
+            setMarcas([...data.marcas]);
+        })
+    }
+    useEffect(() => {
+        if(!modalVisible)
+        {
+            getMarcas()
+        }
+    }, [modalVisible])
+
+    //FUNCION PARA ELIMINAR MARCAS
+    const deleteMarca = () => {
+        const autoAPI = FetchAPI(`${urlMarcas}${idMarca}`, 'DELETE', {});
+        autoAPI.then( data => {
+            getMarcas();
+            setAlert(false)
+        })
+        .catch( err => {
+            console.log(err);
+        })
+    }
+
+    useEffect( () => {
+        if(alert)
+        {
+            alertMovilAction('Eliminar Marca', `¿Desea eliminar la Marca?`, deleteMarca, setAlert)
+            console.log(modalVisible)
+        }
+    }, [alert])
+
+
     return(
         <View>
-            <FlatList
-                ListHeaderComponent = {(
-                    <SearchBar 
-                        placeholder="Buscar Marca..." 
-                        containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}
-                    />
-                )}
-                data = { Marcas }
-                keyExtractor= { ( item ) => item.id }
-                renderItem = { ( {item} ) => (
-                    <View style = {styles.container}>
-                        <Text style={styles.title}>Marca</Text>
-                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF"  placeholder="Marca" value={item.nombre}></TextInput>
-                        <View style={styles.botones}>
-                            <TouchableOpacity style={styles.boton1}><Text style={styles.textoBoton}>Editar</Text></TouchableOpacity>
-                            <TouchableOpacity style={styles.boton2}><Text style={styles.textoBoton}>Eliminar</Text></TouchableOpacity>
-                        </View>
-                    </View>
-                )}
-            />
+            <FlatList 
+                    data = { Marcas }
+                    renderItem = { (item) =>  <CardMarca  data = { item } setIdAuto = { setIdMarca } setModalVisible = { setModalVisible } setAlert = { setAlert } />}
+                    keyExtractor = { item => item.id_marca_PK.toString() }
+                />
+            
+                <ButtonFloating modalVisible = { modalVisible } setModalVisible = { setModalVisible } changeId = { setIdMarca } />
+
+            { modalVisible ? (
+                <ModalMarca
+                    modalVisible = { modalVisible } 
+                    setModalVisible = { setModalVisible }
+                    idMarca = { idMarca }
+                />
+            ) : (null)}
+
+            
         </View>
     )
 }
