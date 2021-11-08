@@ -62,7 +62,9 @@ const PaginationList = (props) => {
                     {" "}
                     <Button
                       onClick={() => {
-                        props.setModeloID(item.id_modelo_PK);
+                        props.setModeloID(item.id_modelos_PK);
+                        console.log("El id es: "+item.id_modelos_PK);
+                                                props.handleShow();
                       }}
                       style={{
                         backgroundColor: "#F7B569",
@@ -80,7 +82,7 @@ const PaginationList = (props) => {
                     {" "}
                     <Button
                       onClick={() => {
-                        props.setModeloID(item.id_modelo_PK);
+                        props.setModeloID(item.id_modelos_PK);
                         props.setAlert(true);
                       }}
                       variant="danger"
