@@ -7,7 +7,9 @@ import PaginationList from "../../common/web/modelos/PagList";
 
 const MarcasView = () => {
   const [marcas, setMarcas] = useState([]);
+  const [alert, setAlert] = useState(false);
   const [marca, setMarca] = useState("");
+  const [marcaid, setMarcaID] = useState(0);
 
   const getMarcas = () => {
     console.log("Cargando marcas...");
@@ -53,7 +55,19 @@ const MarcasView = () => {
           </Button>
         </Col>
       </Row>
-      <PaginationList marcas={marcas}/>
+      <PaginationList
+        setMarcaID={setMarcaID}
+        setAlert={setAlert}
+        marcas={marcas}
+      />
+      <Row
+        className="mt-5"
+        style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}
+      >
+        <Col xs={12} className="text-center text-uppercase fs-2 p-5">
+          Derechos Reservados
+        </Col>
+      </Row>
     </Container>
   );
 };

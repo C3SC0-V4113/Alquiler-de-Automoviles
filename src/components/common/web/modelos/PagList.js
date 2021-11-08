@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pagination } from "react-bootstrap";
+import { Pagination, Table, Button } from "react-bootstrap";
 
 /**
  * COMPONENTE DE TARJETA DE AUTO
@@ -7,7 +7,7 @@ import { Pagination } from "react-bootstrap";
 //import HorizontalCard from "./HoriCardAuto";
 
 const PaginationList = (props) => {
-  const perslice = 3;
+  const perslice = 4;
 
   const noslices = Math.ceil(props.marcas.length / perslice);
 
@@ -48,11 +48,57 @@ const PaginationList = (props) => {
 
   return (
     <>
-      {props.marcas.slice(minimo, maximo).map(function (item, i) {
-        return (
-          <h3>{item.marca}</h3>
-        );
-      })}
+      <Table striped bordered hover variant="dark">
+        <thead>
+          <tr className="justify-content-center">
+            <th>Marca</th>
+            <th colspan="2">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.marcas.slice(minimo, maximo).map(function (item, i) {
+            return (
+              <>
+                <tr>
+                  <td>{item.marca}</td>
+                  <td className="d-grid gap-1">
+                    {" "}
+                    <Button
+                      onClick={() => {
+                        props.setMarcaID(item.id_marca_PK);
+                      }}
+                      style={{
+                        backgroundColor: "#F7B569",
+                        color: "#f9f9f9",
+                        borderColor: "#DEA35F",
+                      }}
+                      variant="outline-light"
+                      size="lg"
+                      type="submit"
+                    >
+                      Editar
+                    </Button>
+                  </td>
+                  <td className="d-grid gap-1">
+                    {" "}
+                    <Button
+                      onClick={() => {
+                        props.setMarcaID(item.id_marca_PK);
+                        props.setAlert(true);
+                      }}
+                      variant="danger"
+                      size="lg"
+                      type="submit"
+                    >
+                      Eliminar
+                    </Button>
+                  </td>
+                </tr>
+              </>
+            );
+          })}
+        </tbody>
+      </Table>
       <Pagination size="lg" className="justify-content-end px-5">
         {items}
       </Pagination>

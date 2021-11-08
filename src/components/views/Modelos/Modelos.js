@@ -4,7 +4,7 @@ import { View } from 'react-native';
 
 const Modelo = () => {
     return(
-        <View style={{backgroundColor:'#1C2530'}} >
+        <View>
         <MarcasView />
         </View>
     )
