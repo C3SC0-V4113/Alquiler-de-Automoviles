@@ -10,6 +10,11 @@ const MarcasView = () => {
   const [alert, setAlert] = useState(false);
   const [marca, setMarca] = useState("");
   const [marcaid, setMarcaID] = useState(0);
+  const [data, setData] = useState({
+    id_marca: 0,
+    marca: "",
+    estado: 1,
+  });
 
   const getMarcas = () => {
     console.log("Cargando marcas...");
@@ -20,8 +25,32 @@ const MarcasView = () => {
   };
 
   useEffect(() => {
+    if (marcaid > 0) {
+      console.log("Hola desde la API marca id");
+      let marcasAPI = FetchAPI(`${urlMarcasWeb}${marcaid}`, "GET", {});
+      console.log(marcasAPI);
+      marcasAPI.then((data) => {
+        console.log(data);
+      });
+    } else {
+      console.log("Para agregar");
+    }
+  }, [marcaid]);
+
+  useEffect(() => {
     getMarcas();
   }, [marca]);
+
+  const UpdateMarca = () => {
+    const marcasAPI = FetchAPI(`${urlMarcasWeb}${marcaid}`, "PUT", data);
+    marcasAPI
+      .then((marca) => {
+        console.log(marca);
+      })
+      .catch((error) => {
+        console.log(console.error());
+      });
+  };
 
   return (
     <Container fluid>
@@ -35,7 +64,14 @@ const MarcasView = () => {
           <Form>
             <Form.Group className="mb-3 justify-content-evenly">
               <Form.Label>Marca</Form.Label>
-              <Form.Control size="lg" placeholder='ej. "Toyota"' />
+              <Form.Control
+                onChange={(text) => {
+                  setMarca(text.target.value);
+                }}
+                value={marca}
+                size="lg"
+                placeholder='ej. "Toyota"'
+              />
             </Form.Group>
           </Form>
         </Col>

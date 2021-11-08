@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { Pagination, Table, Button } from "react-bootstrap";
 
-/**
- * COMPONENTE DE TARJETA DE AUTO
- */
-//import HorizontalCard from "./HoriCardAuto";
-
 const PaginationList = (props) => {
   const perslice = 4;
 
@@ -52,14 +47,14 @@ const PaginationList = (props) => {
         <thead>
           <tr className="justify-content-center">
             <th>Marca</th>
-            <th colspan="2">Acciones</th>
+            <th colSpan="2">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {props.marcas.slice(minimo, maximo).map(function (item, i) {
             return (
               <>
-                <tr>
+                <tr key={i}>
                   <td>{item.marca}</td>
                   <td className="d-grid gap-1">
                     {" "}
