@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import FetchAPI from "../../../utils/FetchAPI";
 import { urlMarcasWeb } from "../../../consts/URLs";
+import ModalBorrar from "../../common/web/vehiculos/ModalBorrar";
 
 import PaginationList from "../../common/web/modelos/PagList";
 
@@ -20,8 +21,10 @@ const MarcasView = () => {
   const Desicion = () => {
     if (marcaid > 0) {
       UpdateMarca();
+      reset();
     } else {
-      alert("Agregando...");
+      CreateMarca();
+      reset();
     }
   };
 
@@ -31,6 +34,16 @@ const MarcasView = () => {
     marcasAPI.then((data) => {
       setMarcas([...data.marcas]);
     });
+  };
+
+  const reset = () => {
+    setMarcaID(0);
+    setData({
+      id_marca: 0,
+      marca: "",
+      estado: 1,
+    });
+    getMarcas();
   };
 
   useEffect(() => {
@@ -62,6 +75,18 @@ const MarcasView = () => {
       .catch((error) => {
         console.log(console.error());
       });
+  };
+
+  const CreateMarca = () => {
+    let MarcasNew = FetchAPI(urlMarcasWeb, "POST", data);
+    MarcasNew.then((data) => {
+      if (data.id_marca_PK !== 0) {
+        console.log("Se creo la marca");
+        reset();
+      }
+    }).catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
