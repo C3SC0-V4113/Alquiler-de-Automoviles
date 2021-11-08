@@ -89,8 +89,27 @@ const MarcasView = () => {
     });
   };
 
+  const deleteMarca = () => {
+    let marcasAPI = FetchAPI(`${urlMarcasWeb}${marcaid}`, "DELETE", {});
+    marcasAPI
+      .then((data) => {
+        reset();
+        setAlert(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <Container fluid>
+      <ModalBorrar
+        show={alert}
+        title={"Eliminar Marca"}
+        message={"¿Quieres eliminar esta marca?"}
+        setAlert={setAlert}
+        action={deleteMarca}
+      />
       <Row>
         <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
           <h1 style={{ color: "#F7B569" }}>Marcas</h1>
