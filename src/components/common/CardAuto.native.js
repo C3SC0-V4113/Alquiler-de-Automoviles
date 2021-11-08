@@ -3,14 +3,14 @@ import { View, StyleSheet, Text } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { useNavigation } from '@react-navigation/native';
+//import { useNavigation } from '@react-navigation/native';
 
 //Context dee Auth
 import { AuthContext } from '../../contexts/AuthContext';
 
 const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
 
-    const navigation = useNavigation();
+    //const navigation = useNavigation();
 
     const { typeUser, setIdVehiculo, setInfoAlqui, infoAlqui } = useContext( AuthContext );
 
@@ -59,7 +59,7 @@ const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
                             onPress = { () => { 
                                 setIdVehiculo(id_auto_PK); 
                                 setInfoAlqui({ ...infoAlqui, precio_neto: Number(precio_dia) })
-                                navigation.navigate('Alquileres'); 
+                                //navigation.navigate('Alquileres'); 
                             } }
                         />
                     </View>
@@ -70,6 +70,7 @@ const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
                             containerStyle = { styles.button } 
                             buttonStyle = {{ backgroundColor: '#F7B661', borderRadius: 0 }}
                             onPress = { () => {setIdAuto(id_auto_PK); setModalVisible(true) } }
+                            
                         />
                         <Button 
                             title = 'Eliminar' 

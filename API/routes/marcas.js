@@ -22,6 +22,22 @@ ruta.get('/', (req, res) => {
 
 })
 
+//PETICION GET (Marcas por ID)
+ruta.get('/:id', (req, res) => {
+    let id_marca = req.params.id;
+
+    let result = getMarcasID( id_marca );
+    result.then( marcas => {
+        res.json({ marcas })
+    })
+    .catch( err => {
+        res.status(400).json({
+            mensaje: 'Ocurrio un problema al momento de obtener las marcas',
+            err
+        })
+    })
+})
+
 //PETICION POST
 ruta.post('/', (req, res) => {
     let body = req.body;
@@ -92,6 +108,18 @@ async function getMarcas()
         }
     });
 }
+
+//FUNCION PARA OBTENER LAS MARCAS POR ID
+async function getMarcasID( id_marca )
+{
+    return await Marca.findAll({
+        where: {
+            id_marca_PK: id_marca,
+            estado: 0
+        }
+    })
+}
+
 
 //FUNCION PARA CREAR UNA MARCA
 async function createMarca(body)
