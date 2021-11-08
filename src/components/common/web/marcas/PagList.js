@@ -4,7 +4,7 @@ import { Pagination, Table, Button } from "react-bootstrap";
 const PaginationList = (props) => {
   const perslice = 4;
 
-  const noslices = Math.ceil(props.modelos.length / perslice);
+  const noslices = Math.ceil(props.marcas.length / perslice);
 
   const [minimo, setMinimo] = useState(0);
   const [maximo, setMaximo] = useState(perslice);
@@ -14,8 +14,8 @@ const PaginationList = (props) => {
       setMinimo(0);
       setMaximo(perslice);
     } else {
-      if (key * perslice > props.modelos.length) {
-        setMaximo(props.modelos.length);
+      if (key * perslice > props.marcas.length) {
+        setMaximo(props.marcas.length);
       } else {
         setMaximo(key * perslice);
       }
@@ -46,23 +46,21 @@ const PaginationList = (props) => {
       <Table striped bordered hover variant="dark">
         <thead>
           <tr className="justify-content-center">
-            <th>Modelo</th>
             <th>Marca</th>
             <th colSpan="2">Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {props.modelos.slice(minimo, maximo).map(function (item, i) {
+          {props.marcas.slice(minimo, maximo).map(function (item, i) {
             return (
               <>
                 <tr key={i}>
-                  <td>{item.modelo}</td>
-                  <td>{item.marca.marca}</td>
+                  <td>{item.marca}</td>
                   <td className="d-grid gap-1">
                     {" "}
                     <Button
                       onClick={() => {
-                        props.setModeloID(item.id_modelo_PK);
+                        props.setMarcaID(item.id_marca_PK);
                       }}
                       style={{
                         backgroundColor: "#F7B569",
@@ -80,7 +78,7 @@ const PaginationList = (props) => {
                     {" "}
                     <Button
                       onClick={() => {
-                        props.setModeloID(item.id_modelo_PK);
+                        props.setMarcaID(item.id_marca_PK);
                         props.setAlert(true);
                       }}
                       variant="danger"

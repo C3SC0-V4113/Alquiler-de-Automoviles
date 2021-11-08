@@ -4,7 +4,7 @@ import FetchAPI from "../../../utils/FetchAPI";
 import { urlMarcasWeb } from "../../../consts/URLs";
 import ModalBorrar from "../../common/web/vehiculos/ModalBorrar";
 
-import PaginationList from "../../common/web/modelos/PagList";
+import PaginationList from "../../common/web/marcas/PagList";
 
 const MarcasView = () => {
   const [marcas, setMarcas] = useState([]);
