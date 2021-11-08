@@ -68,7 +68,7 @@ const ModalModelos = (props) => {
 
   const reset = () => {
     setData({
-        id_marca: "",
+      id_marca: "",
       modelo: "",
     });
     props.setModeloID(0);
@@ -89,7 +89,7 @@ const ModalModelos = (props) => {
                   setMarca(item.target.value);
                   setData({
                     ...data,
-                    id_marca: item.target.value ,
+                    id_marca: item.target.value,
                   });
                 }}
                 as="select"

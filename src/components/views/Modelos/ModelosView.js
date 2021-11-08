@@ -4,6 +4,7 @@ import FetchAPI from "../../../utils/FetchAPI";
 import { urlMarcasWeb, urlModelosWeb } from "../../../consts/URLs";
 import PaginationList from "../../common/web/modelos/PagList";
 import ModalModelos from "../../common/web/modelos/ModalOS";
+import ModalBorrar from "../../common/web/vehiculos/ModalBorrar";
 
 const ModelosView = () => {
   const [show, setShow] = useState(false);
@@ -23,12 +24,31 @@ const ModelosView = () => {
     });
   };
 
+  const deleteModelos = () => {
+    const modelosAPI = FetchAPI(`${urlModelosWeb}${modeloid}`, "DELETE", {});
+    modelosAPI
+      .then((data) => {
+        getModelos();
+        setAlert(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getModelos();
   }, [modelo]);
 
   return (
     <Container fluid>
+      <ModalBorrar
+        show={alert}
+        title={"Eliminar Modelo"}
+        message={"¿Quieres eliminar este modelo?"}
+        setAlert={setAlert}
+        action={deleteModelos}
+      />
       <ModalModelos
         show={show}
         modelos={modelos}
@@ -42,24 +62,24 @@ const ModelosView = () => {
         </Col>
       </Row>
       <Row className="text-end mb-5">
-          <Col className="px-5" xs={12}>
-            <Button
-              onClick={() => {
-                setModeloID(0);
-                handleShow();
-              }}
-              style={{
-                backgroundColor: "#1E2430",
-                color: "#f9f9f9",
-                borderColor: "#202633",
-              }}
-              size="lg"
-              variant="primary"
-            >
-              Agregar Modelo
-            </Button>
-          </Col>
-        </Row>
+        <Col className="px-5" xs={12}>
+          <Button
+            onClick={() => {
+              setModeloID(0);
+              handleShow();
+            }}
+            style={{
+              backgroundColor: "#1E2430",
+              color: "#f9f9f9",
+              borderColor: "#202633",
+            }}
+            size="lg"
+            variant="primary"
+          >
+            Agregar Modelo
+          </Button>
+        </Col>
+      </Row>
       <PaginationList
         setModeloID={setModeloID}
         modelos={modelos}

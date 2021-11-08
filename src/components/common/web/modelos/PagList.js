@@ -63,8 +63,8 @@ const PaginationList = (props) => {
                     <Button
                       onClick={() => {
                         props.setModeloID(item.id_modelos_PK);
-                        console.log("El id es: "+item.id_modelos_PK);
-                                                props.handleShow();
+                        console.log("El id es: " + item.id_modelos_PK);
+                        props.handleShow();
                       }}
                       style={{
                         backgroundColor: "#F7B569",
