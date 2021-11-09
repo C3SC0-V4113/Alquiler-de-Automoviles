@@ -1,86 +1,72 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { View, Text, StyleSheet, TextInput,ScrollView, TouchableOpacity,FlatList } from 'react-native';
 import { SearchBar } from 'react-native-elements'
+import { urlModelos } from '../../../consts/URLs';
+import FetchAPI from '../../../utils/FetchAPI';
+import CardModelo from '../../common/CardModelo.native';
+import { alertMovilAction } from '../../../utils/Alert';
+import ButtonFloating from '../../common/ButtonFloating.native';
+import ModalModelo from '../../common/ModalModelos.native';
 
-const Modelos = [
-    {
-        id: '1',
-        nombre: 'Aveo',
-    },
-    {
-        id: '2',
-        nombre: 'Equinox',
-    },
-    {
-        id: '3',
-        nombre: 'Escape',
-    },
-    {
-        id: '4',
-        nombre: 'Mustang',
-    },
-    {
-        id: '5',
-        nombre: 'Civic',
-    },
-    {
-        id: '6',
-        nombre: 'Accord',
-    },
-    {
-        id: '7',
-        nombre: 'Pilot',
-    },
-    {
-        id: '8',
-        nombre: 'Elantra',
-    },
-    {
-        id: '9',
-        nombre: 'Accent',
-    },
-    {
-        id: '10',
-        nombre: 'Forte',
-    },
-    {
-        id: '11',
-        nombre: 'Rio',
-    },
-    {
-        id: '12',
-        nombre: 'Soul',
-    },
-    {
-        id: '13',
-        nombre: 'Hilux',
-    },
-]
+const ModelosView = () => {
+    const [ modalVisible, setModalVisible ] = useState(false);
+    const [ modelos, setModelos ] = useState([]);
+    const [ idModelo, setIdModelo] = useState(0);
+    const [ alert, setAlert ] = useState(false);
+
+    //FUNCION PARA OBTENER LAS MARCAS
+    const getModelos = () => {
+        let modelosAPI = FetchAPI(urlModelos, 'GET', {});
+        modelosAPI.then( data => {
+            setModelos([...data.modelos]);
+        })
+    }
+    useEffect(() => {
+        if(!modalVisible)
+        {
+            getModelos()
+        }
+    }, [modalVisible])
+
+    //FUNCION PARA ELIMINAR MARCAS
+    const deleteModelo = () => {
+        const modeloAPI = FetchAPI(`${urlModelos}${idModelo}`, 'DELETE', {});
+        modeloAPI.then( data => {
+            getModelos();
+            setAlert(false)
+        })
+        .catch( err => {
+            console.log(err);
+        })
+    }
+
+    useEffect( () => {
+        if(alert)
+        {
+            alertMovilAction('Eliminar Modelo', `¿Desea eliminar el modelo?`, deleteModelo, setAlert)
+            console.log(modalVisible)
+        }
+    }, [alert])
 
 
-const MarcasView = () => {
+
     return(
         <View>
-            <FlatList
-                ListHeaderComponent = {(
-                    <SearchBar 
-                        placeholder="Buscar Modelo..." 
-                        containerStyle={{backgroundColor: "#1C2530", width:'100%', borderRadius: 10, borderBottomWidth: 0 }}
-                    />
-                )}
-                data = { Modelos }
-                keyExtractor= { ( item ) => item.id }
-                renderItem = { ( {item} ) => (
-                    <View style = {styles.container}>
-                        <Text style={styles.title}>Modelo</Text>
-                        <TextInput style={styles.textInput} editable={false} placeholderTextColor="#D8D4CF" value={item.nombre}  placeholder="Marca"></TextInput>
-                        <View style={styles.botones}>
-                            <TouchableOpacity style={styles.boton1}><Text style={styles.textoBoton}>Editar</Text></TouchableOpacity>
-                            <TouchableOpacity style={styles.boton2}><Text style={styles.textoBoton}>Eliminar</Text></TouchableOpacity>
-                        </View>
-                    </View>
-                )}
+            <FlatList 
+                    data = { modelos }
+                    renderItem = { (item) =>  <CardModelo  data = { item } setIdAuto = { setIdModelo } setModalVisible = { setModalVisible } setAlert = { setAlert } />}
+                    keyExtractor = { item => item.id_modelos_PK.toString() }
             />
+
+            <ButtonFloating modalVisible = { modalVisible } setModalVisible = { setModalVisible } changeId = { setIdModelo } />
+
+            { modalVisible ? (
+                <ModalModelo
+                    modalVisible = { modalVisible } 
+                    setModalVisible = { setModalVisible }
+                    idMarca = { idModelo }
+                />
+            ) : (null)}
         </View>
     )
 }
@@ -143,4 +129,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default MarcasView;
+export default ModelosView;
