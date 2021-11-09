@@ -13,31 +13,35 @@ import { AuthContext } from "./contexts/AuthContext";
 
 
 function App() { 
-    const [ typeUser, setTypeUser ] = useState(0);// Tipos de usuario: 1-Administrador, 2-Empleado, 3-Cliente
-    const [ isAuth, setIsAuth ] = useState(false);
-    const [ idUser, setIdUser ] = useState(0);
+    const [ typeUser, setTypeUser ] = useState(3);// Tipos de usuario: 1-Administrador, 2-Empleado, 3-Cliente
+    const [ isAuth, setIsAuth ] = useState(true);
+    const [ idUser, setIdUser ] = useState(1);
     const [ idVehiculo, setIdVehiculo ] = useState(0);
-
-    const dataAuth = {
-        isAuth,
-        idUser,
-        setIdUser,
-        setIsAuth,
-        setTypeUser,
-        idVehiculo,
-        setIdVehiculo,
+    const [ infoAlqui, setInfoAlqui ] = useState({
         entrega: {
             lugar: '',
-            fecha: ''
+            fecha: '2021-11-03'
         },
         devolucion: {
             lugar: '',
             fecha: ''
         },
-        precio_neto: 0
-    }
-
+        precio_neto: 0 
+    })
     const changeAuth = () => setIsAuth(!isAuth);
+
+    const dataAuth = {
+        changeAuth,
+        setTypeUser,
+        setIdUser,
+        typeUser,
+        idUser,
+        isAuth,
+        idVehiculo,
+        setIdVehiculo,
+        infoAlqui,
+        setInfoAlqui
+    }
 
     return (
         <BrowserRouter>

@@ -1,11 +1,107 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row, Table, Form, Button } from 'react-bootstrap';
-import { AuthContext } from '../../../contexts/AuthContext';
 import './style.css'
 
-const DetalleVehiculoView = () => {
+import FormAlquiler from '../../common/web/alquileres/FormAlquiler';
 
-    const store = useContext(AuthContext);
+//Context
+import { AuthContext } from '../../../contexts/AuthContext';
+
+//Validaciones
+import { validationDateWeb } from '../../../utils/Validations';
+
+//FetchAPI
+import FetchAPI from '../../../utils/FetchAPI';
+
+//URL's API
+import { urlAutos, urlAlquileres } from '../../../consts/URLs';
+import { useHistory } from 'react-router';
+
+const DetalleVehiculoView = () => {
+    const history = useHistory();
+
+    const { typeUser, idVehiculo, infoAlqui, setInfoAlqui, idUser } = useContext(AuthContext);
+    const [ dias, setDias ] = useState(0);
+    const [ precioTotal, setPrecioTotal ] = useState(0);
+    const [ dataAuto, setDataAuto ] = useState({
+        ac: "",
+        anio: 0,
+        estado: 0,
+        estado_auto: {id_estado_auto_PK: 0, estado_auto: ''},
+        id_auto_PK: 0,
+        id_estado_auto_FK: 0,
+        imagen: "",
+        modelo: {id_modelos_PK: 0, modelo: '', marca: {id_marca_PK: 0, marca: ""} },
+        motor: "",
+        pasajeros: 0,
+        placa: "",
+        precio_dia: "",
+        puertas: 0,
+        transmision: "",
+        vidrios_electricos: ""
+    })
+
+    useEffect( () => {
+        if(idVehiculo !== 0)
+        {
+            const autoAPI = FetchAPI(`${ urlAutos }${idVehiculo}`, 'GET', {});
+
+            autoAPI.then( auto => {
+                var info = auto[0];
+                setDataAuto({ ...info });
+                calcularDias();
+            })
+            .catch(err => {
+                console.log(err);
+            })
+            
+        }
+        else
+        {
+            history.push('/public/Autos');
+        }
+    }, [infoAlqui])
+
+    useEffect( () => {
+        setPrecioTotal( Number(infoAlqui.precio_neto) * dias );
+    }, [dias])
+
+    //FUNCION PARA CALCULAR LOS DIAS DE DIFERENCIA ENTRE LAS FECHAS
+    const calcularDias = () => {
+        if(validationDateWeb( infoAlqui.entrega.fecha, infoAlqui.devolucion.fecha ))
+        {
+            const fechaMin = infoAlqui.entrega.fecha
+            const fechaMax = infoAlqui.devolucion.fecha
+
+            const fechaIni = new Date(fechaMin).getTime();
+            const fechaFin = new Date(fechaMax).getTime();
+
+            const diff = fechaFin - fechaIni;
+
+            setDias(diff/(1000*60*60*24));
+            return diff/(1000*60*60*24)
+        }
+        else
+        {
+            setDias(0);
+            return 0
+        }
+    }
+
+    const createAlquiler = () => {
+        const data = {
+            id_usuario: idUser,
+            id_auto: idVehiculo,
+            lugar_entrega: infoAlqui.entrega.lugar,
+            fecha_entrega: infoAlqui.entrega.fecha,
+            lugar_devolucion: infoAlqui.devolucion.lugar,
+            fecha_devolucion: infoAlqui.devolucion.fecha,
+            dias_alquiler: dias,
+            precio_neto: infoAlqui.precio_neto,
+            precio_total: precioTotal 
+        }
+
+    }
 
     return(
         <Container fluid='lg' >
@@ -14,22 +110,22 @@ const DetalleVehiculoView = () => {
                 <Col xs={12} sm={12} md={8}>
                     <Row>
                         <Col xs = {12} className='mt-3'>
-                            <h3>Alquiler de Toyota Corolla por 2 días</h3>
+                            <h3>Alquiler de { dataAuto.modelo.marca.marca } { dataAuto.modelo.modelo } por { dias } días</h3>
                         </Col>
                         <Col xs = {6} className='mt-4'>
                             <p>Entrega de vehículo:</p>
-                            <p>Colonia Escalón</p>
-                            <p>06/09/2021 10:00 AM</p>
+                            <p>{ infoAlqui.entrega.lugar }</p>
+                            <p>{ infoAlqui.entrega.fecha }</p>
                         </Col>
                         <Col xs = {6} className='mt-4'>
-                            <p>Entrega de vehículo</p>
-                            <p>Colonia Escalón</p>
-                            <p>07/09/2021 10:00 AM</p>
+                            <p>Devolución de vehículo</p>
+                            <p>{ infoAlqui.devolucion.lugar }</p>
+                            <p>{ infoAlqui.devolucion.fecha }</p>
                         </Col>
                     </Row>
                 </Col>
                 <Col xs={12} sm={12} md={4}>
-                    <img className = 'image' src = 'https://motorsports.com.uy/wp-content/uploads/toyota-corolla-2014-91.jpg' />
+                    <img className = 'image' src = { dataAuto.imagen } />
                 </Col>
                 <Table hover size="sm">
                     <thead>
@@ -42,89 +138,23 @@ const DetalleVehiculoView = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td className='align-rigth'>Toyota Corrolla</td>
-                            <td className='text-center'>2</td>
-                            <td className='text-center'>$ 30.00</td>
-                            <td className='text-center'>$ 60.00</td>
+                            <td className='align-rigth'>{ dataAuto.modelo.marca.marca } { dataAuto.modelo.modelo }</td>
+                            <td className='text-center'>{ dias }</td>
+                            <td className='text-center'>${ infoAlqui.precio_neto }</td>
+                            <td className='text-center'>${ precioTotal }</td>
                         </tr>
                         <tr>
                             <td className='align-rigth'>Total</td>
                             <td></td>
                             <td></td>
-                            <td className='text-center'>$ 60.00</td>
+                            <td className='text-center'>${ precioTotal }</td>
                         </tr>
                     </tbody>
                 </Table>
             </Row>
-            <Row className = 'card mt-3'>
-                <h3 className='mt-3'>Información del cliente</h3>
-                <Form>
-                    <Row>
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Nombres</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese sus nombres" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Apellidos</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese sus apellidos" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Correo electrónico</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese su correo electrónico" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Dirección de residencia</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese su dirección" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Número de teléfono</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese su número de teléfono" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Fecha de nacimiento</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese su fecha de nacimiento" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Usuario</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese su usuario" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>Contraseña</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese una contraseña" />
-                            </Form.Group>
-                        </Col>
-
-                        <Col md={4}>
-                            <Form.Group className="mb-3">
-                                <Form.Label>confirmar contraseña</Form.Label>
-                                <Form.Control type="text" placeholder="Ingrese de nuevo su contraseña" />
-                            </Form.Group>
-                        </Col>
-                    </Row>
-                </Form>
-            </Row>
+            { idUser !== 0 ? (null) : (
+                <FormAlquiler />
+            ) }
             <div className = 'action mt-3 flex-end'>
                 <Button>Confirmar Alquiler</Button>
                 <Button>Regresar</Button>

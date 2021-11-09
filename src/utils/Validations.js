@@ -65,3 +65,25 @@ export function validationDate(dateMin, dateMax)
         return false;
     }
 }
+
+export function validationDateWeb(dateMin, dateMax)
+{
+    const formanDateMin = new Date(dateMin);
+    const formanDateMax = new Date(dateMax);
+    
+    if( !isNaN(formanDateMin) && !isNaN(formanDateMax) )
+    {
+        if( formanDateMin.getTime() < formanDateMax.getTime() )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}

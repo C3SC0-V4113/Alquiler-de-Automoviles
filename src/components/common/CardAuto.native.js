@@ -16,18 +16,6 @@ const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
 
     const { id_auto_PK, anio, placa, precio_dia, transmision, pasajeros, puertas, ac, motor, vidrios_electricos, imagen, modelo} = data.item;
     
-    const getImage = () =>
-    {
-        switch (imagen)
-        {
-            case 'yaris.jpg':
-                return require('../../assets/img/yaris.jpg')
-            case 'corrolla.jpg':
-                return require('../../assets/img/corrolla.jpg')
-            case 'lancer.jpg':
-                return require('../../assets/img/lancer.jpg')
-        }
-    }
     
     return(
         <Card
@@ -36,7 +24,7 @@ const CardAuto = ({ data, setIdAuto, setModalVisible, setAlert }) => {
             <Card.Image
                 containerStyle = { styles.image }
                 resizeMode = 'stretch'
-                source = { getImage() }
+                source = {{ uri: imagen }}
             />   
             <Card.Title style = { styles.title }>{` ${modelo.marca.marca} ${modelo.modelo}`}</Card.Title>
             <View style = {{ display: 'flex', flexDirection: 'column', width: '100%' }}>

@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import FetchAPI from "../../../utils/FetchAPI";
 //Componentes de Vehiculos
 import PaginationList from "../../common/web/vehiculos/PagList";
 import ModalEdit from "../../common/web/vehiculos/ModalEdit";
 import ModalBorrar from "../../common/web/vehiculos/ModalBorrar";
+import FormFechaLugar from "../../common/web/alquileres/FormfechaLugar";
+
 //URL API
 import { urlAutosWeb } from "../../../consts/URLs";
+//Context
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const VehiculosView = () => {
+
+  const { infoAlqui, setIdVehiculo, setInfoAlqui, typeUser } = useContext( AuthContext );
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -65,25 +72,33 @@ const VehiculosView = () => {
             <h1 style={{ color: "#F7B569" }}>Vehiculos</h1>
           </Col>
         </Row>
-        <Row className="text-end mb-5">
-          <Col className="px-5" xs={12}>
-            <Button
-              onClick={() => {
-                setIdAuto(0);
-                handleShow();
-              }}
-              style={{
-                backgroundColor: "#1E2430",
-                color: "#f9f9f9",
-                borderColor: "#202633",
-              }}
-              size="lg"
-              variant="primary"
-            >
-              Agregar Auto
-            </Button>
-          </Col>
-        </Row>
+
+        { typeUser === 0 || typeUser === 3 ? (
+            <>
+              <FormFechaLugar />
+              <hr class="mt-3 mb-3"/>
+            </>
+          ) : (
+            <Row className="text-end mb-5">
+              <Col className="px-5" xs={12}>
+                <Button
+                  onClick={() => {
+                    setIdAuto(0);
+                    handleShow();
+                  }}
+                  style={{
+                    backgroundColor: "#1E2430",
+                    color: "#f9f9f9",
+                    borderColor: "#202633",
+                  }}
+                  size="lg"
+                  variant="primary"
+                >
+                  Agregar Auto
+                </Button>
+              </Col>
+            </Row>
+          ) }
         <PaginationList
           autos={autos}
           setIdAuto={setIdAuto}

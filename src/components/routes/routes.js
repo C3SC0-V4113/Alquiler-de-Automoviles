@@ -84,6 +84,9 @@ export const routesPublic = [
     {
         path: 'Clientes',
         component: lazy(()=>import('../views/Clientes/Clientes')),
+        exact: true
+    },
+    {
         path: 'Detalle',
         component: lazy(() => import('../views/detalleVehiculo/DetalleVehiculo')),
         exact: true
