@@ -90,6 +90,29 @@ export const WebNavPublic = ({ children, typeUser }) => {
                 >
                   Registrarse
                 </NavLink>
+                <NavDropdown title="Usuario">
+                  <NavDropdown.Item>
+                    <NavLink
+                      style={{ color: "black" }}
+                      to="/public/Perfil"
+                      className="nav-link"
+                      activeClassName="nav-link active"
+                    >
+                      Mi Perfil
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item>
+                    <NavLink
+                      style={{ color: "black" }}
+                      to="/public/Signup"
+                      className="nav-link"
+                      activeClassName="nav-link active"
+                    >
+                      Salir
+                    </NavLink>
+                  </NavDropdown.Item>
+                </NavDropdown>
               </Nav>
             ) : (
               <Nav>
