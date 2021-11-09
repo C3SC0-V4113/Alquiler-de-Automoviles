@@ -17,11 +17,17 @@ import { urlAutosWeb } from "../../../consts/URLs";
 const HomeView = () => {
   const [autos, setAutos] = useState([]);
   const [show, setShow] = useState(false);
+  const [no, setNo] = useState(0);
 
   const getAutos = () => {
     let autosAPI = FetchAPI(urlAutosWeb, "GET", {});
     autosAPI.then((data) => {
       setAutos([...data]);
+      if (autos.length < 8) {
+        setNo(autos.length);
+      } else {
+        setNo(8);
+      }
     });
   };
 
@@ -99,7 +105,7 @@ const HomeView = () => {
           </Form.Group>
         </Form>
         <Row style={{ backgroundColor: "#F7B569" }}>
-          {autos.map(function (item, i) {
+          {autos.slice(0, no).map(function (item, i) {
             return (
               <Col key={i} xs={12} md={3}>
                 <Card>

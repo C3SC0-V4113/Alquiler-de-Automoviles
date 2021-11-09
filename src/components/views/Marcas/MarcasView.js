@@ -38,12 +38,14 @@ const MarcasView = () => {
 
   const reset = () => {
     setMarcaID(0);
+    setMarca([]);
     setData({
       id_marca: 0,
       marca: "",
       estado: 1,
     });
     getMarcas();
+    setTexto("Agregar");
   };
 
   useEffect(() => {

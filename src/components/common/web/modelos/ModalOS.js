@@ -64,6 +64,7 @@ const ModalModelos = (props) => {
       console.log("Insertando...");
       createModelos();
     }
+    props.handleClose();
   };
 
   const reset = () => {
@@ -115,7 +116,7 @@ const ModalModelos = (props) => {
         <Button variant="secondary" onClick={props.handleClose}>
           Cerrar
         </Button>
-        <Button variant="primary" onClick={(props.handleClose, Desicion)}>
+        <Button variant="primary" onClick={Desicion}>
           Guardar Cambios
         </Button>
       </Modal.Footer>

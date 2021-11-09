@@ -38,7 +38,7 @@ const ModelosView = () => {
 
   useEffect(() => {
     getModelos();
-  }, [modelo]);
+  }, [show]);
 
   return (
     <Container fluid>
@@ -86,6 +86,14 @@ const ModelosView = () => {
         handleShow={handleShow}
         setAlert={setAlert}
       />
+      <Row
+        className="mt-5"
+        style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}
+      >
+        <Col xs={12} className="text-center text-uppercase fs-2 p-5">
+          Derechos Reservados
+        </Col>
+      </Row>
     </Container>
   );
 };
