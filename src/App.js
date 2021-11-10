@@ -13,14 +13,14 @@ import { AuthContext } from "./contexts/AuthContext";
 
 
 function App() { 
-    const [ typeUser, setTypeUser ] = useState(3);// Tipos de usuario: 1-Administrador, 2-Empleado, 3-Cliente
+    const [ typeUser, setTypeUser ] = useState(1);// Tipos de usuario: 1-Administrador, 2-Empleado, 3-Cliente
     const [ isAuth, setIsAuth ] = useState(true);
     const [ idUser, setIdUser ] = useState(1);
     const [ idVehiculo, setIdVehiculo ] = useState(0);
     const [ infoAlqui, setInfoAlqui ] = useState({
         entrega: {
             lugar: '',
-            fecha: '2021-11-03'
+            fecha: ''
         },
         devolucion: {
             lugar: '',

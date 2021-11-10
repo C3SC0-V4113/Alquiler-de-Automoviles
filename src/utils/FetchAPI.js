@@ -3,35 +3,32 @@
 //METHOD: TIPO DE PETICION QUE SE HARA (GET, POST, PUT, DELETE)
 //BODY: LOS DATOS QUE SE ENVIARAN DONDE SEA NECESARIO A LA API
 const FetchAPI = async (url, method, body) => {
-  var Request = {};
+    var Request = {};
 
-  if (method === "GET") {
-    Request = {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  } else {
-    Request = {
-      method: method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(body),
-    };
-  }
+    if (method === "GET") {
+        Request = {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        };
+    } else {
+        Request = {
+            method: method,
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(body),
+        };
+    }
 
-  try {
-    const response = await fetch(url, Request);
-    console.log("Respuesta de API");
-    const json=response.json();
-    console.log(json);
-    return json;
-  } catch (error) {
-    console.log(error);
-    return {};
-  }
+    try {
+        const response = await fetch(url, Request);
+        const json = response.json();
+        return json;
+    } catch (error) {
+        return error;
+    }
 
 
 };

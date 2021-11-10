@@ -36,12 +36,12 @@ export const routesPriv = [
         path: 'clientes',
         component: lazy(() => import('../views/Clientes/Clientes')),
         exact: true
+    },
+    {
+        path: 'perfil',
+        component: lazy(() => import('../views/profile/Profile')),
+        exact: true
     }
-    // {
-    //     path: 'perfil',
-    //     component: lazy(() => import('../views/')),
-    //     exact: true
-    // },
     // {
     //     path: 'signout',
     //     component: lazy(() => import('../views/')),

@@ -101,6 +101,18 @@ const DetalleVehiculoView = () => {
             precio_total: precioTotal 
         }
 
+        const alquilerAPI = FetchAPI(`${urlAlquileres}`, 'POST', data);
+
+        alquilerAPI.then( alquiler => {
+            if(alquiler)
+            {
+                alert('Alquiler creado');
+            }
+        })
+        .catch( err => {
+            console.log('error: '+err);
+        })
+
     }
 
     return(
@@ -156,8 +168,8 @@ const DetalleVehiculoView = () => {
                 <FormAlquiler />
             ) }
             <div className = 'action mt-3 flex-end'>
-                <Button>Confirmar Alquiler</Button>
-                <Button>Regresar</Button>
+                <Button onClick = { () => createAlquiler() } >Confirmar Alquiler</Button>
+                <Button onClick = { () => history.push('/public/Autos') } >Regresar</Button>
             </div>
         </Container>
     )

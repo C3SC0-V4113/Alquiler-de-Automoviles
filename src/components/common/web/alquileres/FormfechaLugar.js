@@ -16,7 +16,7 @@ const FormFechaLugar = () => {
                         type="text" 
                         placeholder="Sucursal de Entrega"
                         value = { infoAlqui.entrega.lugar }
-                        onChangeCapture = { (e) => { 
+                        onChange = { (e) => { 
                                 setInfoAlqui({ ...infoAlqui, entrega: { ...infoAlqui.entrega, lugar: e.target.value} }) 
                             } 
                         } 
@@ -27,7 +27,7 @@ const FormFechaLugar = () => {
                         type="date" 
                         placeholder="Fecha de Entrega"
                         value = { infoAlqui.entrega.fecha }
-                        onChangeCapture = { (e) => { 
+                        onChange = { (e) => { 
                                 setInfoAlqui({ ...infoAlqui, entrega: { ...infoAlqui.entrega, fecha: e.target.value} });
 
                                 console.log(e.target.value);
@@ -40,7 +40,7 @@ const FormFechaLugar = () => {
                         type="text" 
                         placeholder="Sucursal de Devolución"
                         value = { infoAlqui.devolucion.lugar }
-                        onChangeCapture = { (e) => { 
+                        onChange = { (e) => { 
                                 setInfoAlqui({ ...infoAlqui, devolucion: { ...infoAlqui.devolucion, lugar: e.target.value} }) 
                             } 
                         }
@@ -51,7 +51,7 @@ const FormFechaLugar = () => {
                         type="date" 
                         placeholder="Fecha de Devolución"
                         value = { infoAlqui.devolucion.fecha }
-                        onChangeCapture = { (e) => { 
+                        onChange = { (e) => { 
                                 setInfoAlqui({ ...infoAlqui, devolucion: { ...infoAlqui.devolucion, fecha: e.target.value} }) 
                             } 
                         }
