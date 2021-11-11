@@ -28,6 +28,10 @@ const ProfileView = () => {
     getUser();
   }, []);
 
+  const updateUser = () => {
+    console.log(infoUser);
+  };
+
   //FUNCION PARA OBTENER LOS DATOS DEL USUARIO LOGGEADO
   const getUser = () => {
     const userAPI = FetchAPI(`${urlUsuariosWeb}${idUser}`, "GET");
@@ -64,6 +68,7 @@ const ProfileView = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Nombres</Form.Label>
                 <Form.Control
+                  value={infoUser.nombres}
                   onChange={(text) => {
                     setInfoUser({ ...infoUser, nombres: text.target.value });
                   }}
@@ -77,6 +82,7 @@ const ProfileView = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Apellidos</Form.Label>
                 <Form.Control
+                  value={infoUser.apellidos}
                   onChange={(text) =>
                     setInfoUser({ ...infoUser, apellidos: text.target.value })
                   }
@@ -90,10 +96,11 @@ const ProfileView = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Correo electrónico</Form.Label>
                 <Form.Control
+                  value={infoUser.email}
                   onChange={(text) =>
                     setInfoUser({ ...infoUser, email: text.target.value })
                   }
-                  type="text"
+                  type="email"
                   placeholder="Ingrese su correo electrónico"
                 />
               </Form.Group>
@@ -102,7 +109,14 @@ const ProfileView = () => {
             <Col md={6}>
               <Form.Group className="mb-3">
                 <Form.Label>Usuario</Form.Label>
-                <Form.Control onChange = { text => setInfoUser({ ...infoUser, usuario: text.target.value }) } type="text" placeholder="Ingrese su usuario" />
+                <Form.Control
+                  value={infoUser.usuario}
+                  onChange={(text) =>
+                    setInfoUser({ ...infoUser, usuario: text.target.value })
+                  }
+                  type="text"
+                  placeholder="Ingrese su usuario"
+                />
               </Form.Group>
             </Col>
 
@@ -112,7 +126,13 @@ const ProfileView = () => {
                 <Form.Control
                   type="text"
                   placeholder="Ingrese su fecha de nacimiento"
-                  onChange = { text => setInfoUser({ ...infoUser, fecha_nacimiento: text.target.value }) }
+                  value={infoUser.fecha_nacimiento}
+                  onChange={(text) =>
+                    setInfoUser({
+                      ...infoUser,
+                      fecha_nacimiento: text.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
@@ -128,9 +148,15 @@ const ProfileView = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Contraseña actual</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="password"
                   placeholder="Ingrese su contraseña actual"
-                  onChange = { text => setInfoUser({ ...infoUser, password_actual: text.target.value }) }
+                  value={infoUser.password_actual}
+                  onChange={(text) =>
+                    setInfoUser({
+                      ...infoUser,
+                      password_actual: text.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
@@ -141,9 +167,15 @@ const ProfileView = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Contraseña nueva</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="password"
                   placeholder="Ingrese su nueva contraseña"
-                  onChange = { text => setInfoUser({ ...infoUser, password_new: text.target.value }) }
+                  value={infoUser.password_new}
+                  onChange={(text) =>
+                    setInfoUser({
+                      ...infoUser,
+                      password_new: text.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
@@ -152,9 +184,15 @@ const ProfileView = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Confirmar contraseña nueva</Form.Label>
                 <Form.Control
-                  type="text"
+                  value={infoUser.password_confirm}
+                  type="password"
                   placeholder="Confirme su nueva contraseña"
-                  onChange = { text => setInfoUser({ ...infoUser, password_confirm: text.target.value }) }
+                  onChange={(text) =>
+                    setInfoUser({
+                      ...infoUser,
+                      password_confirm: text.target.value,
+                    })
+                  }
                 />
               </Form.Group>
             </Col>
@@ -163,7 +201,13 @@ const ProfileView = () => {
       </Row>
 
       <div className="containerButton">
-        <Button>Guardar Cambios</Button>
+        <Button
+          onClick={() => {
+            updateUser();
+          }}
+        >
+          Guardar Cambios
+        </Button>
       </div>
     </Container>
   );
