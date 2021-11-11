@@ -9,7 +9,14 @@ import { AuthContext } from "../../../contexts/AuthContext";
 //FECTH_API
 import FetchAPI from "../../../utils/FetchAPI";
 
+import ModalAlert from "../../common/web/AlertNormal";
+
 const ProfileView = () => {
+  const handleClose = () => setShow(false);
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [alert, setAlert] = useState(false);
+  const [type, setType] = useState("info");
   const { idUser } = useContext(AuthContext);
   const [infoUser, setInfoUser] = useState({
     id_tipo_usuario: 0,
@@ -29,7 +36,58 @@ const ProfileView = () => {
   }, []);
 
   const updateUser = () => {
-    console.log(infoUser);
+    const userAPI = FetchAPI(`${urlUsuariosWeb}${idUser}`, "PUT", infoUser);
+
+    userAPI
+      .then((user) => {
+        setTitle("Informacion");
+        setMessage("Datos Modificados");
+        setType("info");
+        setAlert(true);
+      })
+      .catch((err) => {
+        console.log("error: " + err);
+      });
+
+    if (
+      infoUser.password_actual !== "" ||
+      infoUser.password_new !== "" ||
+      infoUser.password_confirm !== ""
+    ) {
+      if (validationPasswords()) {
+        const userAPI = FetchAPI(
+          `${urlUsuariosWeb}perfil/${idUser}`,
+          "PUT",
+          infoUser
+        );
+
+        userAPI
+          .then((user) => {
+            if (user.mensaje) {
+              setTitle("Advertencia");
+              setMessage(user.mensaje);
+              setType("warning");
+              setAlert(true);
+            } else {
+              setTitle("Información");
+              setMessage("Contraseña modificada");
+              setType("info");
+              setAlert(true);
+            }
+          })
+          .catch((err) => {
+            console.log("error: " + err);
+          });
+      }
+    }
+  };
+
+  const validationPasswords = () => {
+    if (infoUser.password_new === infoUser.password_confirm) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   //FUNCION PARA OBTENER LOS DATOS DEL USUARIO LOGGEADO
@@ -60,7 +118,15 @@ const ProfileView = () => {
   };
   return (
     <Container>
-      <h1>Mi perfil</h1>
+      <ModalAlert
+        type={type}
+        show={alert}
+        handleClose={handleClose}
+        title={title}
+        message={message}
+        setAlert={setAlert}
+      />
+      ;<h1>Mi perfil</h1>
       <Row>
         <Form>
           <Row>
@@ -139,7 +205,6 @@ const ProfileView = () => {
           </Row>
         </Form>
       </Row>
-
       <h1>Cambiar contraseña</h1>
       <Row>
         <Form>
@@ -199,7 +264,6 @@ const ProfileView = () => {
           </Row>
         </Form>
       </Row>
-
       <div className="containerButton">
         <Button
           onClick={() => {
