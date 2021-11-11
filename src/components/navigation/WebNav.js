@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
+//Context
+import { AuthContext } from "../../contexts/AuthContext";
+
 export const WebNavPublic = ({ children, typeUser }) => {
+
+    const { setIdUser, changeAuth, setTypeUser } = useContext(AuthContext);
+
+    const logout = () => {
+        changeAuth();
+        setIdUser(0);
+        setTypeUser(0);
+    }
+
     return (
         <>
             <Navbar
@@ -43,52 +55,29 @@ export const WebNavPublic = ({ children, typeUser }) => {
                                 >
                                     Autos
                                 </NavLink>
-                                <NavDropdown title="Configuración">
-                                    <NavDropdown.Item>
-                                        <NavLink
-                                            style={{ color: "black" }}
-                                            to="/public/Marcas"
-                                            className="nav-link"
-                                            activeClassName="nav-link active"
-                                        >
-                                            Marcas
-                                        </NavLink>
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Item>
-                                        <NavLink
-                                            style={{ color: "black" }}
-                                            to="/public/Modelos"
-                                            className="nav-link"
-                                            activeClassName="nav-link active"
-                                        >
-                                            Modelos
-                                        </NavLink>
-                                    </NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item>
-                                        <NavLink
-                                            style={{ color: "black" }}
-                                            to="/public/Clientes"
-                                            className="nav-link"
-                                            activeClassName="nav-link active"
-                                        >
-                                            Clientes
-                                        </NavLink>
-                                    </NavDropdown.Item>
-                                </NavDropdown>
-                                <NavLink
-                                    to="/public/Login"
-                                    className="nav-link"
-                                    activeClassName="nav-link active"
-                                >
-                                    Iniciar Sesion
-                                </NavLink>
                                 <NavLink
                                     to="/public/Signup"
                                     className="nav-link"
                                     activeClassName="nav-link active"
                                 >
-                                    Registrarse
+                                    Iniciar Sesion
+                                </NavLink>
+                            </Nav>
+                        ) : (
+                            <Nav>
+                                <NavLink
+                                    to="/public/Home"
+                                    className="nav-link"
+                                    activeClassName=" nav-link active"
+                                >
+                                    Inicio
+                                </NavLink>
+                                <NavLink
+                                    to="/public/Autos"
+                                    className="nav-link"
+                                    activeClassName="nav-link active"
+                                >
+                                    Autos
                                 </NavLink>
                                 <NavDropdown title="Usuario">
                                     <NavDropdown.Item>
@@ -108,42 +97,12 @@ export const WebNavPublic = ({ children, typeUser }) => {
                                             to="/public/Signup"
                                             className="nav-link"
                                             activeClassName="nav-link active"
+                                            onClick = { () => logout() }
                                         >
                                             Salir
                                         </NavLink>
                                     </NavDropdown.Item>
                                 </NavDropdown>
-                            </Nav>
-                        ) : (
-                            <Nav>
-                                <NavLink
-                                    to="/public/Home"
-                                    className="nav-link"
-                                    activeClassName=" nav-link active"
-                                >
-                                    Inicio
-                                </NavLink>
-                                <NavLink
-                                    to="/public/Autos"
-                                    className="nav-link"
-                                    activeClassName="nav-link active"
-                                >
-                                    Autos
-                                </NavLink>
-                                <NavLink
-                                    to="/public/Auto"
-                                    className="nav-link"
-                                    activeClassName="nav-link active"
-                                >
-                                    Perfil
-                                </NavLink>
-                                <NavLink
-                                    to="/public/Signup"
-                                    className="nav-link"
-                                    activeClassName="nav-link active"
-                                >
-                                    Salir
-                                </NavLink>
                             </Nav>
                         )}
                     </Navbar.Collapse>
@@ -155,6 +114,14 @@ export const WebNavPublic = ({ children, typeUser }) => {
 };
 
 export const WebNavPriv = ({ children }) => {
+
+    const { setIdUser, changeAuth, setTypeUser } = useContext(AuthContext);
+
+    const logout = () => {
+        changeAuth();
+        setIdUser(0);
+        setTypeUser(0);
+    }
     return (
         <>
             <Navbar
@@ -194,20 +161,39 @@ export const WebNavPriv = ({ children }) => {
                             >
                                 Autos
                             </NavLink>
-                            <NavLink
-                                to="/dash/marcas"
-                                className="nav-link"
-                                activeClassName=" nav-link active"
-                            >
-                                Marcas
-                            </NavLink>
-                            <NavLink
-                                to="/dash/modelos"
-                                className="nav-link"
-                                activeClassName=" nav-link active"
-                            >
-                                Modelos
-                            </NavLink>
+                            <NavDropdown title="Configuración">
+                                    <NavDropdown.Item>
+                                        <NavLink
+                                            style={{ color: "black" }}
+                                            to="/dash/marcas"
+                                            className="nav-link"
+                                            activeClassName="nav-link active"
+                                        >
+                                            Marcas
+                                        </NavLink>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Item>
+                                        <NavLink
+                                            style={{ color: "black" }}
+                                            to="/dash/modelos"
+                                            className="nav-link"
+                                            activeClassName="nav-link active"
+                                        >
+                                            Modelos
+                                        </NavLink>
+                                    </NavDropdown.Item>
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item>
+                                        <NavLink
+                                            style={{ color: "black" }}
+                                            to="/dash/clientes"
+                                            className="nav-link"
+                                            activeClassName="nav-link active"
+                                        >
+                                            Clientes
+                                        </NavLink>
+                                    </NavDropdown.Item>
+                                </NavDropdown>
                             <NavLink
                                 to="/dash/alquileres"
                                 className="nav-link"
@@ -231,9 +217,10 @@ export const WebNavPriv = ({ children }) => {
                                 Perfil
                             </NavLink>
                             <NavLink
-                                to="/dash/home"
+                                to="/public/Signup"
                                 className="nav-link"
                                 activeClassName=" nav-link active"
+                                onClick = { () => logout() }
                             >
                                 Salir
                             </NavLink>

@@ -95,10 +95,10 @@ export const routesPublic = [
         path: 'Perfil',
         component: lazy(() => import('../views/profile/Profile')),
         exact: true
+    },
+    {
+        path: 'SignUp',
+        component: lazy(() => import('../views/signup/Signup')),
+        exact: true
     }
-    // {
-    //     path: 'perfil',
-    //     component: lazy(() => import('../views/')),
-    //     exact: true
-    // },
 ]

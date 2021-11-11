@@ -165,7 +165,7 @@ const DetalleVehiculoView = () => {
                 </Table>
             </Row>
             { idUser !== 0 ? (null) : (
-                <FormAlquiler />
+                null
             ) }
             <div className = 'action mt-3 flex-end'>
                 <Button onClick = { () => createAlquiler() } >Confirmar Alquiler</Button>
