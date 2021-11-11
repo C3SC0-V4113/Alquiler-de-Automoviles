@@ -11,7 +11,7 @@ import { validationString } from '../../../utils/Validations';
 import FetchAPI from '../../../utils/FetchAPI';
 
 //URL API
-import { urlAuth } from '../../../consts/URLs';
+import { urlAuthWeb } from '../../../consts/URLs';
 import e from 'cors';
 
 function LoginForm({ registrar, setRegistrar }) {
@@ -32,7 +32,7 @@ function LoginForm({ registrar, setRegistrar }) {
     });
 
     const LoginAPi = () => {
-        const authAPI = FetchAPI(urlAuth, 'POST', datos);
+        const authAPI = FetchAPI(urlAuthWeb, 'POST', datos);
 
         authAPI.then( user => {
             if(user.message)

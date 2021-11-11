@@ -14,7 +14,7 @@ import { validationDateWeb } from '../../../utils/Validations';
 import FetchAPI from '../../../utils/FetchAPI';
 
 //URL's API
-import { urlAutos, urlAlquileres } from '../../../consts/URLs';
+import { urlAutosWeb, urlAlquileresWeb } from '../../../consts/URLs';
 import { useHistory } from 'react-router';
 
 const DetalleVehiculoView = () => {
@@ -44,7 +44,7 @@ const DetalleVehiculoView = () => {
     useEffect( () => {
         if(idVehiculo !== 0)
         {
-            const autoAPI = FetchAPI(`${ urlAutos }${idVehiculo}`, 'GET', {});
+            const autoAPI = FetchAPI(`${ urlAutosWeb }${idVehiculo}`, 'GET', {});
 
             autoAPI.then( auto => {
                 var info = auto[0];
@@ -101,7 +101,7 @@ const DetalleVehiculoView = () => {
             precio_total: precioTotal 
         }
 
-        const alquilerAPI = FetchAPI(`${urlAlquileres}`, 'POST', data);
+        const alquilerAPI = FetchAPI(`${urlAlquileresWeb}`, 'POST', data);
 
         alquilerAPI.then( alquiler => {
             if(alquiler)

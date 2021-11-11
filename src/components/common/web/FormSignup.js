@@ -6,7 +6,7 @@ import FormAlquiler from './alquileres/FormAlquiler';
 import FetchAPI from '../../../utils/FetchAPI';
 
 //URL API
-import { urlUsuarios } from '../../../consts/URLs';
+import { urlUsuariosWeb } from '../../../consts/URLs';
 
 //Validations
 import { validationString, validationEmail, validationNumber } from '../../../utils/Validations';
@@ -48,7 +48,7 @@ const FormSignup = ({ registrar, setRegistrar }) => {
                                         {
                                             if( datos.password === datos.password_confirm )
                                             {
-                                                const userAPI = FetchAPI(urlUsuarios, 'POST', datos);
+                                                const userAPI = FetchAPI(urlUsuariosWeb, 'POST', datos);
 
                                                 userAPI.then( user => {
                                                     if(user.id_usuario_PK)
