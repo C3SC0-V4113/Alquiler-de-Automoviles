@@ -19,7 +19,7 @@ const SignupView = () => {
           >
             <Row className="p-5">
               <Image
-			  fluid
+                fluid
                 className="p-5"
                 src="https://react-bootstrap.github.io/logo.svg"
               />

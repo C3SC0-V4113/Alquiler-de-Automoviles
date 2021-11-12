@@ -103,8 +103,7 @@ function LoginForm({ registrar, setRegistrar }) {
             </span>
           </Form.Group>
           <Row className="p-2">
-          <Button
-          
+            <Button
               variant="primary"
               style={{
                 backgroundColor: "#1E2430",
