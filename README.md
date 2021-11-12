@@ -23,7 +23,6 @@ Adicionalmente, si tenemos una llave SSH en nuestro ordenador y reconocida por G
 
 ### Colaboradores
 ------------
-- [Guillermo Alejandro Espinoza Barahona](https://github.com/DerpyWhooves "Guillermo Alejandro Espinoza Barahona") - Programación, diseño, lógica y manuales
 - [Fernando Xavier Maldonado Canjura](https://github.com/XavierCanjura "Fernando Xavier Maldonado Canjura") - Programación, diseño, lógica y manuales
 - [Jaime Ernesto Merino Guerra](https://github.com/MJames095 "Jaime Ernesto Merino Guerra") - Programación, diseño, lógica y manuales
 - [Christian Giovanni Tobar Cerón](https://github.com/Cgeov "Christian Giovanni Tobar Cerón") - Programación, diseño, lógica y manuales
@@ -53,6 +52,6 @@ La licenciante no puede revocar estas libertades en tanto usted siga los términ
 - [Mockups para Móviles](https://drive.google.com/file/d/1aahekHh39qQBUmEBpHBD1vrsQGAVFiXr/view?usp=sharing "Mockups para Móviles")
 - [Mockups para Web](https://drive.google.com/file/d/1Nj4tgP2s2MF0_RS8Ly33PkUxCRlMGFuj/view?usp=sharing "Mockups para Web")
 - [Documento de Fase I](https://drive.google.com/file/d/1rxc3KcRmN-uxyjPbPIzqUIgzfONnjV_b/view?usp=sharing "Documento de Fase I")
-- [Manual de Usuario](https://drive.google.com/file/d/1AtHJYwFhH9gYbigDhjSqKzkf3eXcR63N/view?usp=sharing "Manual de Usuario")
-- [Manual Técnico](https://drive.google.com/file/d/1yAryko-eO559rhudX9Fxp7VvvL2PO0vy/view?usp=sharing "Manual Técnico")
+- [Manual de Usuario](https://drive.google.com/file/d/1J2psgYVL0liLI_6fdMPzfP0CjbUARbXt/view?usp=sharing "Manual de Usuario")
+- [Manual Técnico](https://drive.google.com/file/d/1sazxU1qgKT3wltO4WhKftQNySPXMVCNc/view?usp=sharing "Manual Técnico")
 - [Video Fase II](https://youtu.be/ExWI71vjv9A "Video Fase II")
