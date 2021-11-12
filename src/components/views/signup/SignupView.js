@@ -1,25 +1,57 @@
-import React, { useState, useContext } from 'react';
-import LoginForm from '../../common/web/LoginForm';
-import FormSignup from '../../common/web/FormSignup';
+import React, { useState, useContext } from "react";
+import LoginForm from "../../common/web/LoginForm";
+import FormSignup from "../../common/web/FormSignup";
+import { Container, Row, Col, Button, Image } from "react-bootstrap";
 
 //CONTEXT
-import { AuthContext } from '../../../contexts/AuthContext';
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const SignupView = () => {
-	const [ registrar, setRegistrar ] = useState(false);
-	return (
-		<>
-			{ registrar ? (<FormSignup setRegistrar = { setRegistrar } registrar = {registrar} />) : (
-				<div className='form-container'>
-					<span className='close-btn'>×</span>
-					<div className='form-content-left'>
-						<img className='form-img' src='https://assets.stickpng.com/images/580b585b2edbce24c47b2c54.png' alt='spaceship' />
-					</div>
-					<LoginForm setRegistrar = { setRegistrar } registrar = {registrar} />
-				</div>
-			) }
-		</>
-	);
+  const [registrar, setRegistrar] = useState(false);
+  return (
+    <>
+      <Container style={{ backgroundColor: "#f7b569" }} fluid>
+        <Row style={{ backgroundColor: "#f7b569" }} className="rounded-5 p-5">
+          <Col
+            xs={12}
+            md={6}
+            style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}
+          >
+            <Row className="p-5">
+              <Image
+			  fluid
+                className="p-5"
+                src="https://react-bootstrap.github.io/logo.svg"
+              />
+            </Row>
+            <Row className="text-center text-uppercase fs-2 p-5">
+              <h1>React-Cars</h1>
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            md={6}
+            className="p-5"
+            style={{ backgroundColor: "white" }}
+          >
+            {registrar ? (
+              <FormSignup setRegistrar={setRegistrar} registrar={registrar} />
+            ) : (
+              <LoginForm setRegistrar={setRegistrar} registrar={registrar} />
+            )}
+          </Col>
+        </Row>
+        <Row
+          className="mt-5"
+          style={{ backgroundColor: "#1E2430", color: "#f9f9f9" }}
+        >
+          <Col xs={12} className="text-center text-uppercase fs-2 p-5">
+            Derechos Reservados
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 };
 
 export default SignupView;

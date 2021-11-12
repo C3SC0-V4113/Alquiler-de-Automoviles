@@ -13,8 +13,8 @@ import { urlAutosWeb } from "../../../consts/URLs";
 import { AuthContext } from "../../../contexts/AuthContext";
 
 const VehiculosView = () => {
-
-  const { infoAlqui, setIdVehiculo, setInfoAlqui, typeUser } = useContext( AuthContext );
+  const { infoAlqui, setIdVehiculo, setInfoAlqui, typeUser } =
+    useContext(AuthContext);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -73,32 +73,32 @@ const VehiculosView = () => {
           </Col>
         </Row>
 
-        { typeUser === 0 || typeUser === 3 ? (
-            <>
-              <FormFechaLugar />
-              <hr class="mt-3 mb-3"/>
-            </>
-          ) : (
-            <Row className="text-end mb-5">
-              <Col className="px-5" xs={12}>
-                <Button
-                  onClick={() => {
-                    setIdAuto(0);
-                    handleShow();
-                  }}
-                  style={{
-                    backgroundColor: "#1E2430",
-                    color: "#f9f9f9",
-                    borderColor: "#202633",
-                  }}
-                  size="lg"
-                  variant="primary"
-                >
-                  Agregar Auto
-                </Button>
-              </Col>
-            </Row>
-          ) }
+        {typeUser === 0 || typeUser === 3 ? (
+          <>
+            <FormFechaLugar />
+            <hr class="mt-3 mb-3" />
+          </>
+        ) : (
+          <Row className="text-end mb-5">
+            <Col className="px-5" xs={12}>
+              <Button
+                onClick={() => {
+                  setIdAuto(0);
+                  handleShow();
+                }}
+                style={{
+                  backgroundColor: "#1E2430",
+                  color: "#f9f9f9",
+                  borderColor: "#202633",
+                }}
+                size="lg"
+                variant="primary"
+              >
+                Agregar Auto
+              </Button>
+            </Col>
+          </Row>
+        )}
         <PaginationList
           autos={autos}
           setIdAuto={setIdAuto}

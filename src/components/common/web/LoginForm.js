@@ -1,103 +1,129 @@
-import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router';
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router";
+import { Container, Form, Button, Col, Row } from "react-bootstrap";
 
 //CONTEXT
-import { AuthContext } from '../../../contexts/AuthContext';
+import { AuthContext } from "../../../contexts/AuthContext";
 
 //VALIDATION
-import { validationString } from '../../../utils/Validations';
+import { validationString } from "../../../utils/Validations";
 
 //FETCHAPI
-import FetchAPI from '../../../utils/FetchAPI';
+import FetchAPI from "../../../utils/FetchAPI";
 
 //URL API
-import { urlAuthWeb } from '../../../consts/URLs';
-import e from 'cors';
+import { urlAuthWeb } from "../../../consts/URLs";
+import e from "cors";
 
 function LoginForm({ registrar, setRegistrar }) {
-    const history = useHistory();
-    const { setIdUser, changeAuth, setTypeUser } = useContext(AuthContext);
-    
-    const [ datos, setDatos ] = useState({
-        id_tipo_usuario: 3,
-        nombres: '',
-        apellidos: '',
-        email: '',
-        usuario: '',
-        password: '',
-        password_confirm: '',
-        fecha_nacimiento: '',
-        direccion: '',
-        telefono: ''
-    });
+  const history = useHistory();
+  const { setIdUser, changeAuth, setTypeUser } = useContext(AuthContext);
 
-    const LoginAPi = () => {
-        const authAPI = FetchAPI(urlAuthWeb, 'POST', datos);
+  const [datos, setDatos] = useState({
+    id_tipo_usuario: 3,
+    nombres: "",
+    apellidos: "",
+    email: "",
+    usuario: "",
+    password: "",
+    password_confirm: "",
+    fecha_nacimiento: "",
+    direccion: "",
+    telefono: "",
+  });
 
-        authAPI.then( user => {
-            if(user.message)
-            {
-                alert(user.message);
-            }
-            else
-            {
-                setIdUser(user.usuario.id)
-                setTypeUser(user.usuario.tipo_usuario)
-                changeAuth();
-                history.push('/public/Home')
-            }
-        })
-        .catch( err => {
-            console.log('error:'+err);
-        })
-    }
+  const LoginAPi = () => {
+    const authAPI = FetchAPI(urlAuthWeb, "POST", datos);
 
-    //FUNCION PARA INICIAR SESION EN EL LOGIN
-    const loginUser = () => {
-        if( validationString(datos.usuario) )
-        {
-            if( validationString(datos.password) )
-            {
-                LoginAPi();
-            }
-            else
-            {
-                alert( 'Ingrese su contraseña')
-            }
+    authAPI
+      .then((user) => {
+        if (user.message) {
+          alert(user.message);
+        } else {
+          setIdUser(user.usuario.id);
+          setTypeUser(user.usuario.tipo_usuario);
+          changeAuth();
+          history.push("/public/Home");
         }
-        else
-        {
-            alert('Ingrese su usuario')
-        }
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
+  //FUNCION PARA INICIAR SESION EN EL LOGIN
+  const loginUser = () => {
+    if (validationString(datos.usuario)) {
+      if (validationString(datos.password)) {
+        LoginAPi();
+      } else {
+        alert("Ingrese su contraseña");
+      }
+    } else {
+      alert("Ingrese su usuario");
     }
+  };
 
-    return (
-        <div className='form-content-right'>
-            <form className='form'>
-                <div className="form-inner">
-                    <h1>Login</h1>
-                    <div className="form-group">
-                        <label htmlFor="name">Usuario:</label>
-                        <input type="text" name="name" id="name" onChange={e => { setDatos({...datos, usuario: e.target.value})}}/>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password">Contraseña:</label>
-                        <input type="password" name="password" id="password" onChange={e => { setDatos({...datos, password: e.target.value})}}/>
-                    </div>
-                    <div className='row'>
-                        <span className='form-label'>
-                            ¿Aún no tienes cuenta? Registrate <a href="" onClick = { (e) => { e.preventDefault(); setRegistrar(!registrar) } }>aquí</a>
-                        </span>
-                        <input 
-                            type="submit" value="Ingresar"
-                            onClick = { (e) => {e.preventDefault(); loginUser()}  }
-                        />
-
-                    </div>
-                </div>
-            </form>
-        </div>
-    )
+  return (
+    <>
+      <Container>
+        <Row>
+          <Col className="text-center text-uppercase fs-2 p-5" xs={12}>
+            <h1 style={{ color: "#F7B569" }}>Inicio de Sesión</h1>
+          </Col>
+        </Row>
+        <Form>
+          <Form.Group>
+            <Form.Label>Usuario: </Form.Label>
+            <Form.Control
+              placeholder="Usuario"
+              onChange={(e) => {
+                setDatos({ ...datos, usuario: e.target.value });
+              }}
+            />
+            <Form.Label>Contraseña: </Form.Label>
+            <Form.Control
+              placeholder="Contraseña"
+              type="password"
+              onChange={(e) => {
+                setDatos({ ...datos, password: e.target.value });
+              }}
+            />
+            <span style={{ color: "black" }} className="form-label">
+              ¿Aún no tienes cuenta? Registrate{" "}
+              <a
+                href=""
+                onClick={(e) => {
+                  e.preventDefault();
+                  setRegistrar(!registrar);
+                }}
+              >
+                aquí
+              </a>
+            </span>
+          </Form.Group>
+          <Row className="p-2">
+          <Button
+          
+              variant="primary"
+              style={{
+                backgroundColor: "#1E2430",
+                color: "#f9f9f9",
+                borderColor: "#202633",
+              }}
+              size="lg"
+              onClick={(e) => {
+                e.preventDefault();
+                loginUser();
+              }}
+            >
+              Ingresar
+            </Button>
+          </Row>
+        </Form>
+      </Container>
+    </>
+  );
 }
 
-export default LoginForm
+export default LoginForm;

@@ -4,7 +4,7 @@ import { Alert, Button, Modal } from "react-bootstrap";
 const ModalAlert = (props) => {
   return (
     <Modal show={props.show} onHide={props.handleClose}>
-      <Alert style={{marginBottom: 0}} variant={props.type}>
+      <Alert style={{ marginBottom: 0 }} variant={props.type}>
         <Alert.Heading>{props.title}</Alert.Heading>
         <p>{props.message}</p>
         <hr />
